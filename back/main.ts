@@ -1,8 +1,4 @@
-/*
-
-
-
-*/
+/* SOK by Jordan Reger */
 
 import { parse } from 'https://deno.land/std/flags/mod.ts';
 
@@ -33,21 +29,10 @@ while (true) {
         })();
 
         if(path === "/"){
-          let home = Deno.readFile("./src/index.html");
+          let html = Deno.readFile("./build/index.html");
+          let js = Deno.readFile("./build/App.js");
 
-          let res = new Response(await home, {
-            headers: {
-              "content-type": "text/html; charset=UTF-8",
-            },
-          });
-
-          await request.respondWith(res);
-        }
-
-        else if(path === "/test"){
-          let home = Deno.readFile("./src/test.html");
-
-          let res = new Response(await home, {
+          let res = new Response(await [html, js], {
             headers: {
               "content-type": "text/html; charset=UTF-8",
             },
