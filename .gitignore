@@ -1,2 +1,5 @@
 node_modules
+.cache
+.parcel-cache
 src-tauri
+dist
