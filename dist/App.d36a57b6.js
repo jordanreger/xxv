@@ -1511,223 +1511,1324 @@ Object.keys(_queryAssignedNodes).forEach(function (key) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 console.warn("The main 'lit-element' module entrypoint is deprecated. Please update your imports to use the 'lit' package: 'lit' and 'lit/decorators.ts' or import from 'lit-element/lit-element.ts'.");
-},{"@lit/reactive-element":"../../node_modules/@lit/reactive-element/reactive-element.js","lit-html":"../../node_modules/lit-html/lit-html.js","./lit-element.js":"../../node_modules/lit-element/lit-element.js","@lit/reactive-element/decorators/base.js":"../../node_modules/@lit/reactive-element/decorators/base.js","@lit/reactive-element/decorators/custom-element.js":"../../node_modules/@lit/reactive-element/decorators/custom-element.js","@lit/reactive-element/decorators/property.js":"../../node_modules/@lit/reactive-element/decorators/property.js","@lit/reactive-element/decorators/state.js":"../../node_modules/@lit/reactive-element/decorators/state.js","@lit/reactive-element/decorators/event-options.js":"../../node_modules/@lit/reactive-element/decorators/event-options.js","@lit/reactive-element/decorators/query.js":"../../node_modules/@lit/reactive-element/decorators/query.js","@lit/reactive-element/decorators/query-all.js":"../../node_modules/@lit/reactive-element/decorators/query-all.js","@lit/reactive-element/decorators/query-async.js":"../../node_modules/@lit/reactive-element/decorators/query-async.js","@lit/reactive-element/decorators/query-assigned-nodes.js":"../../node_modules/@lit/reactive-element/decorators/query-assigned-nodes.js"}],"../node_modules/skriv/router.js":[function(require,module,exports) {
-var global = arguments[3];
+},{"@lit/reactive-element":"../../node_modules/@lit/reactive-element/reactive-element.js","lit-html":"../../node_modules/lit-html/lit-html.js","./lit-element.js":"../../node_modules/lit-element/lit-element.js","@lit/reactive-element/decorators/base.js":"../../node_modules/@lit/reactive-element/decorators/base.js","@lit/reactive-element/decorators/custom-element.js":"../../node_modules/@lit/reactive-element/decorators/custom-element.js","@lit/reactive-element/decorators/property.js":"../../node_modules/@lit/reactive-element/decorators/property.js","@lit/reactive-element/decorators/state.js":"../../node_modules/@lit/reactive-element/decorators/state.js","@lit/reactive-element/decorators/event-options.js":"../../node_modules/@lit/reactive-element/decorators/event-options.js","@lit/reactive-element/decorators/query.js":"../../node_modules/@lit/reactive-element/decorators/query.js","@lit/reactive-element/decorators/query-all.js":"../../node_modules/@lit/reactive-element/decorators/query-all.js","@lit/reactive-element/decorators/query-async.js":"../../node_modules/@lit/reactive-element/decorators/query-async.js","@lit/reactive-element/decorators/query-assigned-nodes.js":"../../node_modules/@lit/reactive-element/decorators/query-assigned-nodes.js"}],"../node_modules/@tauri-apps/api/tauri-3147d768.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Wrapper = exports.Title = exports.Page = exports.Date = exports.Body = exports.Author = void 0;
+exports._ = r;
+exports.a = o;
+exports.c = exports.b = void 0;
+exports.d = n;
+exports.e = c;
+exports.i = i;
+exports.t = a;
 
-var _litElement = require("lit-element");
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
 
-/* TOOLS */
-class Wrapper extends _litElement.LitElement {
-  firstUpdated() {
-    global.routes = [];
-    let insideWrapper = this.shadowRoot.host.children;
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-    for (var i = 0; i < insideWrapper.length; i++) {
-      global.routes.push(insideWrapper[i].path);
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+var _t = function t(n, e) {
+  return (_t = Object.setPrototypeOf || {
+    __proto__: []
+  } instanceof Array && function (t, n) {
+    t.__proto__ = n;
+  } || function (t, n) {
+    for (var e in n) {
+      Object.prototype.hasOwnProperty.call(n, e) && (t[e] = n[e]);
     }
+  })(n, e);
+};
 
-    let showing = false;
+function n(n, e) {
+  if ("function" != typeof e && null !== e) throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
 
-    for (var j = 0; j < global.routes.length; j++) {
-      if (window.location.pathname === global.routes[j]) {
-        showing = true;
-        break;
-      }
-    }
-
-    if (!showing) {
-      if (window.location.pathname !== "/404") {
-        window.location.href = "/404";
-      }
-    }
+  function r() {
+    this.constructor = n;
   }
 
-  render() {
-    return (0, _litElement.html)`<slot />`;
-  }
-
+  _t(n, e), n.prototype = null === e ? Object.create(e) : (r.prototype = e.prototype, new r());
 }
 
-exports.Wrapper = Wrapper;
-
-class Page extends _litElement.LitElement {
-  static get properties() {
-    return {
-      path: {
-        type: String
+var _e = function e() {
+  return (exports.b = _e = Object.assign || function (t) {
+    for (var n, e = 1, r = arguments.length; e < r; e++) {
+      for (var o in n = arguments[e]) {
+        Object.prototype.hasOwnProperty.call(n, o) && (t[o] = n[o]);
       }
+    }
+
+    return t;
+  }).apply(this, arguments);
+};
+
+exports.b = _e;
+
+function r(t, n, e, r) {
+  return new (e || (e = Promise))(function (o, a) {
+    function i(t) {
+      try {
+        u(r.next(t));
+      } catch (t) {
+        a(t);
+      }
+    }
+
+    function c(t) {
+      try {
+        u(r.throw(t));
+      } catch (t) {
+        a(t);
+      }
+    }
+
+    function u(t) {
+      var n;
+      t.done ? o(t.value) : (n = t.value, n instanceof e ? n : new e(function (t) {
+        t(n);
+      })).then(i, c);
+    }
+
+    u((r = r.apply(t, n || [])).next());
+  });
+}
+
+function o(t, n) {
+  var e,
+      r,
+      o,
+      a,
+      i = {
+    label: 0,
+    sent: function sent() {
+      if (1 & o[0]) throw o[1];
+      return o[1];
+    },
+    trys: [],
+    ops: []
+  };
+  return a = {
+    next: c(0),
+    throw: c(1),
+    return: c(2)
+  }, "function" == typeof Symbol && (a[Symbol.iterator] = function () {
+    return this;
+  }), a;
+
+  function c(a) {
+    return function (c) {
+      return function (a) {
+        if (e) throw new TypeError("Generator is already executing.");
+
+        for (; i;) {
+          try {
+            if (e = 1, r && (o = 2 & a[0] ? r.return : a[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, a[1])).done) return o;
+
+            switch (r = 0, o && (a = [2 & a[0], o.value]), a[0]) {
+              case 0:
+              case 1:
+                o = a;
+                break;
+
+              case 4:
+                return i.label++, {
+                  value: a[1],
+                  done: !1
+                };
+
+              case 5:
+                i.label++, r = a[1], a = [0];
+                continue;
+
+              case 7:
+                a = i.ops.pop(), i.trys.pop();
+                continue;
+
+              default:
+                if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== a[0] && 2 !== a[0])) {
+                  i = 0;
+                  continue;
+                }
+
+                if (3 === a[0] && (!o || a[1] > o[0] && a[1] < o[3])) {
+                  i.label = a[1];
+                  break;
+                }
+
+                if (6 === a[0] && i.label < o[1]) {
+                  i.label = o[1], o = a;
+                  break;
+                }
+
+                if (o && i.label < o[2]) {
+                  i.label = o[2], i.ops.push(a);
+                  break;
+                }
+
+                o[2] && i.ops.pop(), i.trys.pop();
+                continue;
+            }
+
+            a = n.call(t, i);
+          } catch (t) {
+            a = [6, t], r = 0;
+          } finally {
+            e = o = 0;
+          }
+        }
+
+        if (5 & a[0]) throw a[1];
+        return {
+          value: a[0] ? a[1] : void 0,
+          done: !0
+        };
+      }([a, c]);
     };
   }
-
-  constructor() {
-    super();
-    this.path = "/";
-  }
-
-  static get styles() {
-    return (0, _litElement.css)`
-      div {
-        position: absolute;
-        left: 56.5%;
-        top: 10%;
-        transform: translateX(-50%);
-        width: 85%;
-        padding-bottom: 2.5%;
-      }
-    `;
-  }
-  /*firstUpdated(){
-    global.routes = [];
-    for (var i = 0; i < this.shadowRoot.host.children.length; i++) {
-      if (this.shadowRoot.host.children[i].path) {
-        global.routes.push(this.shadowRoot.host.children[i].path);
-      }
-    }
-    console.log(this.shadowRoot.host.children);
-  }*/
-
-
-  render() {
-    if (window.location.pathname === this.path) {
-      return (0, _litElement.html)`<div><slot /></div>`;
-    } else {
-      return null;
-    }
-  }
-
-}
-/* STYLED ELEMENTS */
-
-
-exports.Page = Page;
-
-class Title extends _litElement.LitElement {
-  static get styles() {
-    return (0, _litElement.css)`
-      .title {
-        width: 85%;
-      }
-
-      @media only screen and (max-width: 600px) {
-        .title {
-          font-weight: 700;
-          font-size: 5vmax;
-        }
-      }
-
-      @media only screen and (min-width: 600px) {
-        .title {
-          font-weight: 700;
-          font-size: 3vmax;
-        }
-      }
-    `;
-  }
-
-  render() {
-    return (0, _litElement.html)`<div class="title"><slot /></div>`;
-  }
-
 }
 
-exports.Title = Title;
+function a(t, n) {
+  void 0 === n && (n = !1);
 
-class Body extends _litElement.LitElement {
-  static get styles() {
-    return (0, _litElement.css)`
-      .body {
-        width: 85%;
-        overflow-x: auto;
-        text-align: justify;
-      }
-    `;
-  }
+  var e = function () {
+    var t = new Int8Array(1);
+    window.crypto.getRandomValues(t);
+    var n = new Uint8Array(Math.max(16, Math.abs(t[0])));
+    return window.crypto.getRandomValues(n), n.join("");
+  }();
 
-  render() {
-    return (0, _litElement.html)`<div class="body"><br/><slot /></div>`;
-  }
-
+  return Object.defineProperty(window, e, {
+    value: function value(r) {
+      return n && Reflect.deleteProperty(window, e), null == t ? void 0 : t(r);
+    },
+    writable: !1,
+    configurable: !0
+  }), e;
 }
 
-exports.Body = Body;
-
-class Author extends _litElement.LitElement {
-  static get styles() {
-    return (0, _litElement.css)`
-      @media only screen and (max-width: 600px) {
-        .author {
-          font-weight: 500;
-          color: #696969;
-          font-size: 2.15vmax;
-        }
-      }
-
-      @media only screen and (min-width: 600px) {
-        .author {
-          font-weight: 500;
-          color: #696969;
-          font-size: 1.25vmax;
-        }
-      }
-    `;
-  }
-
-  render() {
-    return (0, _litElement.html)`<span class="author">— <slot /></span>`;
-  }
-
+function i(t, n) {
+  return void 0 === n && (n = {}), r(this, void 0, void 0, function () {
+    return o(this, function (r) {
+      return [2, new Promise(function (r, o) {
+        var i = a(function (t) {
+          r(t), Reflect.deleteProperty(window, c);
+        }, !0),
+            c = a(function (t) {
+          o(t), Reflect.deleteProperty(window, i);
+        }, !0);
+        window.rpc.notify(t, _e({
+          __invokeKey: __TAURI_INVOKE_KEY__,
+          callback: i,
+          error: c
+        }, n));
+      })];
+    });
+  });
 }
 
-exports.Author = Author;
-
-class Date extends _litElement.LitElement {
-  static get styles() {
-    return (0, _litElement.css)`
-      @media only screen and (max-width: 600px) {
-        .date {
-          font-weight: 500;
-          color: #696969;
-          font-size: 2.15vmax;
-        }
-      }
-
-      @media only screen and (min-width: 600px) {
-        .date {
-          font-weight: 500;
-          color: #696969;
-          font-size: 1.25vmax;
-        }
-      }
-    `;
-  }
-
-  render() {
-    return (0, _litElement.html)`<span class="date"><slot /></span>`;
-  }
-
+function c(t) {
+  return navigator.userAgent.includes("Windows") ? "https://asset.localhost/" + t : "asset://" + t;
 }
 
-exports.Date = Date;
-customElements.get("skriv-app") || customElements.define("skriv-app", Wrapper);
-customElements.get("skriv-page") || customElements.define("skriv-page", Page);
-customElements.get("skriv-title") || customElements.define("skriv-title", Title);
-customElements.get("skriv-author") || customElements.define("skriv-author", Author);
-customElements.get("skriv-date") || customElements.define("skriv-date", Date);
-customElements.get("skriv-body") || customElements.define("skriv-body", Body);
-},{"lit-element":"../../node_modules/lit-element/index.js"}],"App.js":[function(require,module,exports) {
+var u = Object.freeze({
+  __proto__: null,
+  transformCallback: a,
+  invoke: i,
+  convertFileSrc: c
+});
+exports.c = u;
+},{}],"../node_modules/@tauri-apps/api/tauri-fe7c6694.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.i = n;
+
+var _tauri3147d = require("./tauri-3147d768.js");
+
+function n(n) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (i) {
+      return [2, (0, _tauri3147d.i)("tauri", n)];
+    });
+  });
+}
+},{"./tauri-3147d768.js":"../node_modules/@tauri-apps/api/tauri-3147d768.js"}],"../node_modules/@tauri-apps/api/event-92cbfbb1.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.a = c;
+exports.b = r;
+exports.e = void 0;
+exports.l = o;
+exports.o = s;
+
+var _tauri3147d = require("./tauri-3147d768.js");
+
+var _tauriFe7c = require("./tauri-fe7c6694.js");
+
+function r(i, r, u) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      switch (t.label) {
+        case 0:
+          return [4, (0, _tauriFe7c.i)({
+            __tauriModule: "Event",
+            message: {
+              cmd: "emit",
+              event: i,
+              windowLabel: r,
+              payload: u
+            }
+          })];
+
+        case 1:
+          return t.sent(), [2];
+      }
+    });
+  });
+}
+
+function u(i) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, (0, _tauriFe7c.i)({
+        __tauriModule: "Event",
+        message: {
+          cmd: "unlisten",
+          eventId: i
+        }
+      })];
+    });
+  });
+}
+
+function o(r, o) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    var s = this;
+    return (0, _tauri3147d.a)(this, function (c) {
+      return [2, (0, _tauriFe7c.i)({
+        __tauriModule: "Event",
+        message: {
+          cmd: "listen",
+          event: r,
+          handler: (0, _tauri3147d.t)(o)
+        }
+      }).then(function (i) {
+        return function () {
+          return (0, _tauri3147d._)(s, void 0, void 0, function () {
+            return (0, _tauri3147d.a)(this, function (t) {
+              return [2, u(i)];
+            });
+          });
+        };
+      })];
+    });
+  });
+}
+
+function s(i, e) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, o(i, function (t) {
+        e(t), u(t.id).catch(function () {});
+      })];
+    });
+  });
+}
+
+function c(i, e) {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, r(i, void 0, e)];
+    });
+  });
+}
+
+var a = Object.freeze({
+  __proto__: null,
+  listen: o,
+  once: s,
+  emit: c
+});
+exports.e = a;
+},{"./tauri-3147d768.js":"../node_modules/@tauri-apps/api/tauri-3147d768.js","./tauri-fe7c6694.js":"../node_modules/@tauri-apps/api/tauri-fe7c6694.js"}],"../node_modules/@tauri-apps/api/window-526f78f2.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.b = exports.a = exports.W = exports.U = exports.P = exports.L = void 0;
+exports.c = p;
+exports.f = exports.e = exports.d = void 0;
+exports.g = m;
+exports.h = _;
+exports.i = M;
+exports.p = w;
+exports.w = void 0;
+
+var _tauri3147d = require("./tauri-3147d768.js");
+
+var _tauriFe7c = require("./tauri-fe7c6694.js");
+
+var _event92cbfbb = require("./event-92cbfbb1.js");
+
+var s,
+    d = function d(t, e) {
+  this.type = "Logical", this.width = t, this.height = e;
+},
+    l = function () {
+  function t(t, e) {
+    this.type = "Physical", this.width = t, this.height = e;
+  }
+
+  return t.prototype.toLogical = function (t) {
+    return new d(this.width / t, this.height / t);
+  }, t;
+}(),
+    c = function c(t, e) {
+  this.type = "Logical", this.x = t, this.y = e;
+},
+    h = function () {
+  function t(t, e) {
+    this.type = "Physical", this.x = t, this.y = e;
+  }
+
+  return t.prototype.toLogical = function (t) {
+    return new c(this.x / t, this.y / t);
+  }, t;
+}();
+
+exports.f = h;
+exports.e = c;
+exports.P = l;
+exports.L = d;
+exports.U = s;
+
+function m() {
+  return new v(window.__TAURI__.__currentWindow.label, {
+    skip: !0
+  });
+}
+
+function p() {
+  return window.__TAURI__.__windows.map(function (t) {
+    return new v(t.label, {
+      skip: !0
+    });
+  });
+}
+
+!function (t) {
+  t[t.Critical = 1] = "Critical", t[t.Informational = 2] = "Informational";
+}(s || (exports.U = s = {}));
+
+var f = ["tauri://created", "tauri://error"],
+    y = function () {
+  function t(t) {
+    this.label = t, this.listeners = Object.create(null);
+  }
+
+  return t.prototype.listen = function (t, n) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      var e = this;
+      return (0, _tauri3147d.a)(this, function (i) {
+        return this._handleTauriEvent(t, n) ? [2, Promise.resolve(function () {
+          var i = e.listeners[t];
+          i.splice(i.indexOf(n), 1);
+        })] : [2, (0, _event92cbfbb.l)(t, n)];
+      });
+    });
+  }, t.prototype.once = function (t, n) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      var e = this;
+      return (0, _tauri3147d.a)(this, function (i) {
+        return this._handleTauriEvent(t, n) ? [2, Promise.resolve(function () {
+          var i = e.listeners[t];
+          i.splice(i.indexOf(n), 1);
+        })] : [2, (0, _event92cbfbb.o)(t, n)];
+      });
+    });
+  }, t.prototype.emit = function (t, n) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      var e, o;
+      return (0, _tauri3147d.a)(this, function (i) {
+        if (f.includes(t)) {
+          for (e = 0, o = this.listeners[t] || []; e < o.length; e++) {
+            (0, o[e])({
+              event: t,
+              id: -1,
+              payload: n
+            });
+          }
+
+          return [2, Promise.resolve()];
+        }
+
+        return [2, (0, _event92cbfbb.b)(t, this.label, n)];
+      });
+    });
+  }, t.prototype._handleTauriEvent = function (t, e) {
+    return !!f.includes(t) && (t in this.listeners ? this.listeners[t].push(e) : this.listeners[t] = [e], !0);
+  }, t;
+}(),
+    g = function (n) {
+  function r() {
+    return null !== n && n.apply(this, arguments) || this;
+  }
+
+  return (0, _tauri3147d.d)(r, n), r.prototype.scaleFactor = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "scaleFactor"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.innerPosition = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "innerPosition"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.outerPosition = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "outerPosition"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.innerSize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "innerSize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.outerSize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "outerSize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.isFullscreen = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "isFullscreen"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.isMaximized = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "isMaximized"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.isDecorated = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "isDecorated"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.isResizable = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "isResizable"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.isVisible = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "isVisible"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.center = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "center"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.requestUserAttention = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      var e;
+      return (0, _tauri3147d.a)(this, function (i) {
+        return e = null, t && (e = t === s.Critical ? {
+          type: "Critical"
+        } : {
+          type: "Informational"
+        }), [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "requestUserAttention",
+                payload: e
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setResizable = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setResizable",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setTitle = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setTitle",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.maximize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "maximize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.unmaximize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "unmaximize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.toggleMaximize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "toggleMaximize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.minimize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "minimize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.unminimize = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "unminimize"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.show = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "show"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.hide = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "hide"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.close = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "close"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setDecorations = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setDecorations",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setAlwaysOnTop = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setAlwaysOnTop",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setSize = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        if (!t || "Logical" !== t.type && "Physical" !== t.type) throw new Error("the `size` argument must be either a LogicalSize or a PhysicalSize instance");
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setSize",
+                payload: {
+                  type: t.type,
+                  data: {
+                    width: t.width,
+                    height: t.height
+                  }
+                }
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setMinSize = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        if (t && "Logical" !== t.type && "Physical" !== t.type) throw new Error("the `size` argument must be either a LogicalSize or a PhysicalSize instance");
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setMinSize",
+                payload: t ? {
+                  type: t.type,
+                  data: {
+                    width: t.width,
+                    height: t.height
+                  }
+                } : null
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setMaxSize = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        if (t && "Logical" !== t.type && "Physical" !== t.type) throw new Error("the `size` argument must be either a LogicalSize or a PhysicalSize instance");
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setMaxSize",
+                payload: t ? {
+                  type: t.type,
+                  data: {
+                    width: t.width,
+                    height: t.height
+                  }
+                } : null
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setPosition = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        if (!t || "Logical" !== t.type && "Physical" !== t.type) throw new Error("the `position` argument must be either a LogicalPosition or a PhysicalPosition instance");
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setPosition",
+                payload: {
+                  type: t.type,
+                  data: {
+                    x: t.x,
+                    y: t.y
+                  }
+                }
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setFullscreen = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setFullscreen",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setFocus = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setFocus"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setIcon = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setIcon",
+                payload: {
+                  icon: t
+                }
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.setSkipTaskbar = function (t) {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (e) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "setSkipTaskbar",
+                payload: t
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r.prototype.startDragging = function () {
+    return (0, _tauri3147d._)(this, void 0, void 0, function () {
+      return (0, _tauri3147d.a)(this, function (t) {
+        return [2, (0, _tauriFe7c.i)({
+          __tauriModule: "Window",
+          message: {
+            cmd: "manage",
+            data: {
+              label: this.label,
+              cmd: {
+                type: "startDragging"
+              }
+            }
+          }
+        })];
+      });
+    });
+  }, r;
+}(y),
+    v = function (r) {
+  function a(t, a) {
+    void 0 === a && (a = {});
+    var u = r.call(this, t) || this;
+    return (null == a ? void 0 : a.skip) || (0, _tauriFe7c.i)({
+      __tauriModule: "Window",
+      message: {
+        cmd: "createWebview",
+        data: {
+          options: (0, _tauri3147d.b)({
+            label: t
+          }, a)
+        }
+      }
+    }).then(function () {
+      return (0, _tauri3147d._)(u, void 0, void 0, function () {
+        return (0, _tauri3147d.a)(this, function (t) {
+          return [2, this.emit("tauri://created")];
+        });
+      });
+    }).catch(function (t) {
+      return (0, _tauri3147d._)(u, void 0, void 0, function () {
+        return (0, _tauri3147d.a)(this, function (e) {
+          return [2, this.emit("tauri://error", t)];
+        });
+      });
+    }), u;
+  }
+
+  return (0, _tauri3147d.d)(a, r), a.getByLabel = function (t) {
+    return p().some(function (e) {
+      return e.label === t;
+    }) ? new a(t, {
+      skip: !0
+    }) : null;
+  }, a;
+}(g),
+    b = new v(null, {
+  skip: !0
+});
+
+exports.d = b;
+exports.W = v;
+exports.b = g;
+exports.a = y;
+
+function _() {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, (0, _tauriFe7c.i)({
+        __tauriModule: "Window",
+        message: {
+          cmd: "manage",
+          data: {
+            cmd: {
+              type: "currentMonitor"
+            }
+          }
+        }
+      })];
+    });
+  });
+}
+
+function w() {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, (0, _tauriFe7c.i)({
+        __tauriModule: "Window",
+        message: {
+          cmd: "manage",
+          data: {
+            cmd: {
+              type: "primaryMonitor"
+            }
+          }
+        }
+      })];
+    });
+  });
+}
+
+function M() {
+  return (0, _tauri3147d._)(this, void 0, void 0, function () {
+    return (0, _tauri3147d.a)(this, function (t) {
+      return [2, (0, _tauriFe7c.i)({
+        __tauriModule: "Window",
+        message: {
+          cmd: "manage",
+          data: {
+            cmd: {
+              type: "availableMonitors"
+            }
+          }
+        }
+      })];
+    });
+  });
+}
+
+var W = Object.freeze({
+  __proto__: null,
+  WebviewWindow: v,
+  WebviewWindowHandle: y,
+  WindowManager: g,
+  getCurrent: m,
+  getAll: p,
+  appWindow: b,
+  LogicalSize: d,
+  PhysicalSize: l,
+  LogicalPosition: c,
+  PhysicalPosition: h,
+
+  get UserAttentionType() {
+    return s;
+  },
+
+  currentMonitor: _,
+  primaryMonitor: w,
+  availableMonitors: M
+});
+exports.w = W;
+},{"./tauri-3147d768.js":"../node_modules/@tauri-apps/api/tauri-3147d768.js","./tauri-fe7c6694.js":"../node_modules/@tauri-apps/api/tauri-fe7c6694.js","./event-92cbfbb1.js":"../node_modules/@tauri-apps/api/event-92cbfbb1.js"}],"../node_modules/@tauri-apps/api/window.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "LogicalPosition", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.e;
+  }
+});
+Object.defineProperty(exports, "LogicalSize", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.L;
+  }
+});
+Object.defineProperty(exports, "PhysicalPosition", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.f;
+  }
+});
+Object.defineProperty(exports, "PhysicalSize", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.P;
+  }
+});
+Object.defineProperty(exports, "UserAttentionType", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.U;
+  }
+});
+Object.defineProperty(exports, "WebviewWindow", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.W;
+  }
+});
+Object.defineProperty(exports, "WebviewWindowHandle", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.a;
+  }
+});
+Object.defineProperty(exports, "WindowManager", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.b;
+  }
+});
+Object.defineProperty(exports, "appWindow", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.d;
+  }
+});
+Object.defineProperty(exports, "availableMonitors", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.i;
+  }
+});
+Object.defineProperty(exports, "currentMonitor", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.h;
+  }
+});
+Object.defineProperty(exports, "getAll", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.c;
+  }
+});
+Object.defineProperty(exports, "getCurrent", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.g;
+  }
+});
+Object.defineProperty(exports, "primaryMonitor", {
+  enumerable: true,
+  get: function () {
+    return _window526f78f.p;
+  }
+});
+
+require("./tauri-3147d768.js");
+
+require("./tauri-fe7c6694.js");
+
+require("./event-92cbfbb1.js");
+
+var _window526f78f = require("./window-526f78f2.js");
+},{"./tauri-3147d768.js":"../node_modules/@tauri-apps/api/tauri-3147d768.js","./tauri-fe7c6694.js":"../node_modules/@tauri-apps/api/tauri-fe7c6694.js","./event-92cbfbb1.js":"../node_modules/@tauri-apps/api/event-92cbfbb1.js","./window-526f78f2.js":"../node_modules/@tauri-apps/api/window-526f78f2.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
 
-require("skriv");
+var _window = require("@tauri-apps/api/window");
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2;
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1765,23 +2866,18 @@ var App = /*#__PURE__*/function (_LitElement) {
   }
 
   _createClass(App, [{
-    key: "SHA",
-    value: function SHA() {
-      if (undefined) {
-        return undefined.slice(0, 7);
-      } else {
-        return (0, _litElement.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["dev env"])));
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
-      return (0, _litElement.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    <skriv-app>\n      <skriv-page path=\"/\">\n\n        <skriv-title>jordan reger</skriv-title>\n        <skriv-date>web developer and engineering student</skriv-date>\n\n        <skriv-body>\n          <a href=\"https://github.com/jordanreger/latt\"><b>projects/latt</b>: lit elements router</a>\n          <br/>\n          <a href=\"/projects/skriv\"><b>projects/skriv</b>: lit elements blog</a>\n        </skriv-body>\n\n        <skriv-body>\n          <a href=\"/blog/hello-world\"><b>blog/hello world</b></a>\n          <br/>\n          <a href=\"/blog/rklb-stock\"><b>blog/rklb stock</b></a>\n          <br/>\n        </skriv-body>\n\n      </skriv-page>\n\n\n      <skriv-page path=\"/404\">\n        <skriv-title>oopsie woopsie!</skriv-title>\n        <skriv-body>the page you're looking for doesn't exist. just like my ability to understand rust...</skriv-body>\n      </skriv-page>\n\n      <!-- projects -->\n\n      <skriv-page path=\"/projects/skriv\">\n\n        <skriv-title>skriv</skriv-title>\n        <skriv-date>lit elements based blog template</skriv-date>\n        <skriv-body>\n          <a href=\"https://npmjs.com/package/skriv\">find it on npm!</a>\n          <br/>\n          <br/>\n          [docs coming soon]\n        </skriv-body>\n\n      </skriv-page>\n\n\n      <!-- blog posts -->\n      <skriv-page path=\"/blog/hello-world\">\n\n        <skriv-title>hello world!</skriv-title>\n        <skriv-date>10/09/21</skriv-date>\n        <skriv-author>jordan reger</skriv-author>\n        <skriv-body>\n          This is the first blog post of many (maybe). Heaven knows if I'll actually keep this up, because I'm inconsistent when it comes to content creation. This is honestly just a test of my skills making dynamic content, but I may end up actually using this to write about my thoughts.\n          <br/>\n          <br/>\n          Anyways, looks good huh?\n        </skriv-body>\n\n      </skriv-page>\n\n      <skriv-page path=\"/blog/rklb-stock\">\n\n        <skriv-title>why i'm buying rocket lab stock</skriv-title>\n        <skriv-date>10/11/21</skriv-date>\n        <skriv-author>jordan reger</skriv-author>\n        <skriv-body>\n          <b>**This is an opinion. Do NOT take this as a buy signal.**</b>\n          <br/>\n          <br/>\n          <br/>\n          From their <a href=\"https://investors.rocketlabusa.com/overview/default.aspx\">investor page</a>:\n          <br/>\n          <br/>\n          \"Rocket Lab is an end-to-end space company with an established track record of mission success. We deliver reliable launch services, spacecraft components, satellites and other spacecraft and on-orbit management solutions that make it faster, easier and more affordable to access space. We believe that space has defined some of humanity's greatest achievements and it continues to shape our future. We are motivated by the impact we can have on Earth by making it easier to get to space and to use it as a platform for innovation, exploration and infrastructure.\"\n          <br/>\n          <br/>\n          As a rocket nerd, Rocket Lab has always maintained a presence in my mind. Electron, their main launch vehicle, is a beautiful rocket with a (mostly; <a href=\"https://www.youtube.com/watch?v=5ZcZoDFYjXc\">No. 13</a> and <a href=\"https://www.youtube.com/watch?v=Zw3sIUyfSfc\">No. 20</a> both had failures, but no catastrophic events) clean launch history. They are planning on turning Electron into a reusable vehicle - <a href=\"https://www.youtube.com/watch?v=N3CWGDhkmbs\">using parachutes and a helicopter</a> - and yes, this is real. Along with moving to reusable technologies, they're moving to multiple launch complexes as well. Their first and main complex resides in New Zealand and their second and newest complex is on Wallops Island, Virginia. Finally, they've announced new technologies as well: Photon, their configurable satellite system, and Neutron, their newest massive rocket.\n          <br/>\n          <br/>\n          Everything aforementioned is obviously very commendable in its own right, but there's one thing that's really driving me to buy their stock:\n          <br/>\n          <br/>\n          Starship.\n          <br/>\n          <br/>\n          It needs no introduction. It is SpaceX's massive Mars mover. What does it have to do with Rocket Lab? They are in completely different markets, they have quite different launch vehicles, and are different in many more ways - that's precisely the reason I feel Rocket Lab will soar in earnings. They're in completely different markets and SpaceX is transitioning from mainly earth operations to interplanetary missions and larger orbits, meaning that Rocket Lab has an opportunity to swoop in and take the business of many customers in the wake of Falcon 9's success of reducing cost to space. As a result, more and more customers can go to space. Who's going to be able to lift the smaller payloads? Probably not Starship (it can, but with a larger cargo capacity, there's a problem here: transporter missions are going to be few and far between due to the sheer amount of time it will take to fill up the capacity) so it must be someone else. Who's the best contender? Rocket Lab.\n          <br/>\n          <br/>\n          As I mentioned, this is just an opinion and is not meant to inspire action. This article will be updated with more details as time passes.\n          <br/>\n          <br/>\n\n        </skriv-body>\n\n      </skriv-page>\n\n      <skriv-page path=\"/etc/test\">\n        <skriv-title>test</skriv-title>\n        <skriv-date>10/09/21</skriv-date>\n        <skriv-author>jordan reger</skriv-author>\n        <skriv-body>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa tincidunt dui ut ornare lectus. Phasellus faucibus scelerisque eleifend donec pretium. Urna et pharetra pharetra massa massa. Porttitor lacus luctus accumsan tortor posuere ac. Enim eu turpis egestas pretium aenean pharetra magna. Turpis egestas pretium aenean pharetra magna ac placerat vestibulum lectus. Enim neque volutpat ac tincidunt. Arcu ac tortor dignissim convallis aenean et tortor at risus. Varius duis at consectetur lorem donec. Sit amet purus gravida quis blandit turpis cursus in. Aliquam ultrices sagittis orci a scelerisque purus semper eget duis. Sollicitudin aliquam ultrices sagittis orci a scelerisque. Felis eget nunc lobortis mattis. Cras semper auctor neque vitae tempus. Dignissim diam quis enim lobortis. Ultrices neque ornare aenean euismod elementum nisi quis. Elit eget gravida cum sociis.\n\n        Sagittis orci a scelerisque purus. Mattis enim ut tellus elementum sagittis vitae et. In metus vulputate eu scelerisque felis. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Nisl tincidunt eget nullam non nisi est sit amet facilisis. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Arcu odio ut sem nulla pharetra diam. Cras sed felis eget velit aliquet sagittis id consectetur. Vestibulum sed arcu non odio euismod lacinia at quis. Tortor condimentum lacinia quis vel eros donec ac odio. Sed faucibus turpis in eu mi bibendum. Tortor consequat id porta nibh venenatis cras sed felis eget. Velit laoreet id donec ultrices tincidunt arcu non. Sem viverra aliquet eget sit. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Amet est placerat in egestas erat. Tincidunt eget nullam non nisi est sit amet facilisis.\n\n        Elementum facilisis leo vel fringilla est ullamcorper eget. Nisl vel pretium lectus quam id leo. Tincidunt lobortis feugiat vivamus at augue eget. Ullamcorper morbi tincidunt ornare massa. Lobortis feugiat vivamus at augue eget arcu. Neque egestas congue quisque egestas. Elementum nisi quis eleifend quam adipiscing vitae. Eu augue ut lectus arcu. Lorem donec massa sapien faucibus. Egestas sed sed risus pretium. Odio pellentesque diam volutpat commodo. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida hendrerit. Tempus quam pellentesque nec nam aliquam sem et.\n\n        Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare. Vulputate mi sit amet mauris commodo quis imperdiet massa tincidunt. Euismod elementum nisi quis eleifend quam adipiscing. In est ante in nibh. Semper quis lectus nulla at volutpat diam ut. Vel facilisis volutpat est velit egestas dui id ornare arcu. Condimentum lacinia quis vel eros donec. Scelerisque viverra mauris in aliquam sem. Vel quam elementum pulvinar etiam non quam lacus suspendisse. Urna nunc id cursus metus aliquam eleifend. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Ut eu sem integer vitae justo eget magna fermentum iaculis. Gravida in fermentum et sollicitudin ac orci phasellus egestas. Sed augue lacus viverra vitae congue eu consequat ac felis. Etiam non quam lacus suspendisse faucibus interdum. Nunc aliquet bibendum enim facilisis.\n\n        Netus et malesuada fames ac turpis egestas maecenas. Vitae aliquet nec ullamcorper sit. Venenatis urna cursus eget nunc scelerisque viverra mauris. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Cursus turpis massa tincidunt dui ut ornare. Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Ornare lectus sit amet est placerat in egestas erat imperdiet. Tellus molestie nunc non blandit massa enim nec. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Massa sed elementum tempus egestas. Cursus sit amet dictum sit amet. Nisl pretium fusce id velit ut tortor pretium viverra suspendisse. Et malesuada fames ac turpis egestas maecenas. In cursus turpis massa tincidunt dui ut ornare lectus. Tellus id interdum velit laoreet id donec. Etiam non quam lacus suspendisse faucibus. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Pellentesque habitant morbi tristique senectus et netus et. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis. Mauris in aliquam sem fringilla ut morbi tincidunt augue.\n        </skriv-body>\n      </skriv-page>\n\n      <div id=\"sha\">", "</div>\n\n    </skriv-app>\n    "])), this.SHA());
+      var webview = new _window.WebviewWindow('theUniqueLabel', {
+        url: "https://github.com/tauri-apps/tauri"
+      });
+      console.log(webview);
+      return (0, _litElement.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      test\n    "])));
     }
   }], [{
     key: "styles",
     get: function get() {
-      return (0, _litElement.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      a {\n        color: #212121;\n        font-weight: 500;\n      }\n\n      #sha {\n        position: fixed;\n        right: 1%;\n        bottom: 1%;\n        font-size: 0.5rem;\n        color: #696969;\n      }\n    "])));
+      return (0, _litElement.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      a {\n        color: #212121;\n        font-weight: 500;\n      }\n\n      #sha {\n        position: fixed;\n        right: 1%;\n        bottom: 1%;\n        font-size: 0.5rem;\n        color: #696969;\n      }\n    "])));
     }
   }]);
 
@@ -1789,7 +2885,7 @@ var App = /*#__PURE__*/function (_LitElement) {
 }(_litElement.LitElement);
 
 customElements.get("app-root") || customElements.define("app-root", App);
-},{"lit-element":"../../node_modules/lit-element/index.js","skriv":"../node_modules/skriv/router.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"lit-element":"../../node_modules/lit-element/index.js","@tauri-apps/api/window":"../node_modules/@tauri-apps/api/window.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1817,7 +2913,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50081" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55908" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

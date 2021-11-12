@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit-element";
-import "skriv";
+import { WebviewWindow } from '@tauri-apps/api/window';
 
 class App extends LitElement {
   static get styles() {
@@ -20,8 +20,12 @@ class App extends LitElement {
   }
 
   render() {
+    const webview = new WebviewWindow('theUniqueLabel', {
+      url: "https://github.com/tauri-apps/tauri"
+    })
+    console.log(webview);
     return html`
-
+      test
     `;
   }
 }
