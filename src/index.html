@@ -35,6 +35,10 @@
 
     <link rel="stylesheet" href="/main.css" />
 
+
+    <link rel="modulepreload" href="/pkgSearchBar.js" as="script" />
+    <script type="module" src="/pkgSearchBar.js"></script>
+
   </head>
   <body>
     <div id="airframe">
@@ -42,14 +46,7 @@
         <span class="title">xxv</span>
       </div>
       <div id="pkg">
-        <form action="/testJS" onsubmit="javascript:void(0)">
-          <input type="url" class="input" name="pkg" placeholder="pkg url" list="commonpkgs" />
-
-          <datalist id="commonpkgs">
-            <option value="https://xxv.network/test">
-          </datalist>
-        </form>
-        <span id="test">test</span>
+        <pkg-search-bar></pkg-search-bar>
       </div>
     </div>
   </body>

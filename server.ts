@@ -36,11 +36,8 @@ while (true) {
             break;
 
           /* OTHER */
-          case '/testJS':
-            console.log("test");
-            f = false;
 
-          /* SETUP */
+          /* ASSETS */
           case '/manifest.webmanifest':
             f = true;
             file = Deno.readFile("./src/utils/manifest.webmanifest");
@@ -62,6 +59,14 @@ while (true) {
             ct = "image/png";
             break;
 
+          /* DEPENDENCIES */
+          case '/pkgSearchBar.js':
+            f = true;
+            file = Deno.readFile("./src/bundled/pkgSearchBar.js");
+            ct = "text/javascript";
+            break;
+
+          /* DEFAULT */
           default:
             f = true;
             file = Deno.readFile("./src/utils/404.html");
