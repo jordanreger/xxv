@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
     />
+
+
+    <!-- PWA -->
+
+    <!--<link rel="manifest" href="/manifest.webmanifest" />
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .catch(err => console.log("service worker not registered", err))
+        })
+      }
+    </script>-->
+
+    <!-- PWA -->
+
+    <link rel="apple-touch-icon" sizes="1000x1000" href="/base_logo.png" />
+    <link rel="shortcut icon" href="/base_logo.png" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
@@ -15,7 +34,6 @@
     </noscript>
 
     <link rel="stylesheet" href="/main.css" />
-    <script src="/search.js"></script>
 
   </head>
   <body>
@@ -24,7 +42,7 @@
         <span class="title">xxv</span>
       </div>
       <div id="pkg">
-        <form action="/testJS">
+        <form action="/testJS" onsubmit="javascript:void(0)">
           <input type="url" class="input" name="pkg" placeholder="pkg url" list="commonpkgs" />
 
           <datalist id="commonpkgs">
