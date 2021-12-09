@@ -13,7 +13,7 @@
       class pkgSearchBar extends LitElement {
         async handleSubmit(e){
           e.preventDefault();
-          let input = this.shadowRoot.children[0].children[0], url = input.value, main = this.parentElement;
+          let input = this.shadowRoot.children[1].children[0], url = input.value, main = this.parentElement;
           if(url) {
             let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
               .then((data) => data.json())
