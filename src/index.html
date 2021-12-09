@@ -13,15 +13,18 @@
       class pkgSearchBar extends LitElement {
         async handleSubmit(e){
           e.preventDefault();
-          let input = this.shadowRoot.children[0].children[0], url = input.value, main = this.parentElement;
+          let input = this.shadowRoot.children[1].children[0], url = input.value, main = this.parentElement;
           if(url) {
-            let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
+            // EDIT BEFORE PUSH
+            let resText = await fetch(url)
               .then((data) => data.json())
               .then((data) => { return JSON.stringify(data, null, 2) })
-            let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
+            //EDIT BEFORE PUSH
+            let res = await fetch(url)
               .then((data) => data.json())
               .then((data) => { return data })
-            let js = await fetch(`https://jrcors.herokuapp.com/${res.url}`)
+            //EDIT BEFORE PUSH
+            let js = await fetch(res.url)
               .then((data) => data.text())
               .then((data) => { return data })
 
@@ -66,6 +69,7 @@
             <br/>
             <b><code>xxv.package</code></b>
             ${pkgList}
+            <br/>
             <button @click="${() => {localStorage.clear(); location.reload(); }}">clear</button>
           `;
         }
