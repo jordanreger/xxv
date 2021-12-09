@@ -58,7 +58,7 @@
         render() {
           let pkgList = [];
           for(let i = 0; i < window.localStorage.length; i++){
-            pkgList.push(html`<pre style="word-wrap: break-word; white-space: pre-wrap" @click="${() => console.log(window.localStorage[Object.keys(window.localStorage)[i]])}">— ${Object.keys(window.localStorage)[i]}</pre>`);
+            pkgList.push(html`<pre style="word-wrap: break-word; white-space: pre-wrap" @click="${() => { let main = this.parentElement; main.children[0].innerText = window.localStorage[Object.keys(window.localStorage)[i]]; }}">— ${Object.keys(window.localStorage)[i]}</pre>`);
           }
           return html`
             <ul>
