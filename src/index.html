@@ -13,18 +13,15 @@
       class pkgSearchBar extends LitElement {
         async handleSubmit(e){
           e.preventDefault();
-          let input = this.shadowRoot.children[1].children[0], url = input.value, main = this.parentElement;
+          let input = this.shadowRoot.children[0].children[0], url = input.value, main = this.parentElement;
           if(url) {
-            // EDIT BEFORE PUSH
-            let resText = await fetch(url)
+            let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
               .then((data) => data.json())
               .then((data) => { return JSON.stringify(data, null, 2) })
-            //EDIT BEFORE PUSH
-            let res = await fetch(url)
+            let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
               .then((data) => data.json())
               .then((data) => { return data })
-            //EDIT BEFORE PUSH
-            let js = await fetch(res.url)
+            let js = await fetch(`https://jrcors.herokuapp.com/${res.url}`)
               .then((data) => data.text())
               .then((data) => { return data })
 
