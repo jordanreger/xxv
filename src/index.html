@@ -25,7 +25,7 @@
               .then((data) => data.text())
               .then((data) => { return data })
 
-            main.children[0].innerText = resText;
+            main.children[1].innerText = resText;
             localStorage.setItem(`${res.pkg}`, `${js}`);
             /*const newDiv = document.createElement("test-element");
             main.appendChild(newDiv);*/
