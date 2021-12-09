@@ -38,13 +38,15 @@
 
         render() {
           return html`
+          <br/>
           <form @submit="${(e) => this.handleSubmit(e)}">
             <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
             <datalist id="commonpkgs">
-              <option value="https://jordanreger.com/robots.txt">
-              <option value="https://xxv.network/test">
+              <option value="https://jordanreger.com/test.json">
+              <option value="https://jordanreger.com/fx.json">
             </datalist>
           </form>
+          <br/>
           `;
         }
       }
@@ -61,9 +63,10 @@
             pkgList.push(html`<pre style="word-wrap: break-word; white-space: pre-wrap" @click="${() => { let main = this.parentElement; main.children[0].innerText = window.localStorage[Object.keys(window.localStorage)[i]]; }}">— ${Object.keys(window.localStorage)[i]}</pre>`);
           }
           return html`
-            <ul>
-              ${pkgList}
-            </ul>
+            <br/>
+            <b><code>xxv.package</code></b>
+            ${pkgList}
+            <button @click="${() => {localStorage.clear(); location.reload(); }}">clear</button>
           `;
         }
       }
@@ -71,7 +74,8 @@
     </script>
 
     <main id="app">
-      <pre style="word-wrap: break-word; white-space: pre-wrap">xxv.package</pre>
+      <b><code>xxv.package.code</code></b>
+      <pre style="word-wrap: break-word; white-space: pre-wrap">~/</pre>
       <pkg-searchbar></pkg-searchbar>
       <pkg-list></pkg-list>
     </main>
