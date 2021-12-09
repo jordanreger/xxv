@@ -5,49 +5,75 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
     />
-
-
-    <!-- PWA -->
-
-    <!--<link rel="manifest" href="/manifest.webmanifest" />
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-          navigator.serviceWorker
-            .register("/service-worker.js")
-            .catch(err => console.log("service worker not registered", err))
-        })
-      }
-    </script>-->
-
-    <!-- PWA -->
-
-    <link rel="apple-touch-icon" sizes="1000x1000" href="/base_logo.png" />
-    <link rel="shortcut icon" href="/base_logo.png" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
-    </noscript>
-
-    <link rel="stylesheet" href="/main.css" />
-
-
-    <link rel="modulepreload" href="/pkgSearchBar.js" as="script" />
-    <script type="module" src="/pkgSearchBar.js"></script>
-
   </head>
   <body>
-    <div id="airframe">
-      <div id="title">
-        <span class="title">xxv</span>
-      </div>
-      <div id="pkg">
-        <pkg-search-bar></pkg-search-bar>
-      </div>
-    </div>
+    <script name="pkgSearchBar" type="module">
+      import {LitElement, html, css} from "https://esm.sh/lit";
+
+      class pkgSearchBar extends LitElement {
+        async handleSubmit(e){
+          e.preventDefault();
+          let input = this.shadowRoot.children[0].children[0], url = input.value, main = this.parentElement;
+          if(url) {
+            let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
+              .then((data) => data.json())
+              .then((data) => { return JSON.stringify(data, null, 2) })
+            let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
+              .then((data) => data.json())
+              .then((data) => { return data })
+            let js = await fetch(`https://jrcors.herokuapp.com/${res.url}`)
+              .then((data) => data.text())
+              .then((data) => { return data })
+
+            main.children[0].innerText = resText;
+            localStorage.setItem(`${res.pkg}`, `${js}`);
+            /*const newDiv = document.createElement("test-element");
+            main.appendChild(newDiv);*/
+            input.value = "";
+          } else {
+            console.log("please input a valid package url")
+          }
+
+        }
+
+        render() {
+          return html`
+          <form @submit="${(e) => this.handleSubmit(e)}">
+            <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
+            <datalist id="commonpkgs">
+              <option value="https://jordanreger.com/robots.txt">
+              <option value="https://xxv.network/test">
+            </datalist>
+          </form>
+          `;
+        }
+      }
+      customElements.get("pkg-searchbar") || customElements.define("pkg-searchbar", pkgSearchBar);
+    </script>
+
+    <script name="pkgList" type="module">
+      import {LitElement, html, css} from "https://esm.sh/lit";
+
+      class pkgList extends LitElement {
+        render() {
+          let pkgList = [];
+          for(let i = 0; i < window.localStorage.length; i++){
+            pkgList.push(html`<pre style="word-wrap: break-word; white-space: pre-wrap" @click="${() => console.log(window.localStorage[Object.keys(window.localStorage)[i]])}">— ${Object.keys(window.localStorage)[i]}</pre>`);
+          }
+          return html`
+            <ul>
+              ${pkgList}
+            </ul>
+          `;
+        }
+      }
+      customElements.get("pkg-list") || customElements.define("pkg-list", pkgList);
+    </script>
+
+    <main id="app">
+      <pre style="word-wrap: break-word; white-space: pre-wrap">xxv.package</pre>
+      <pkg-searchbar></pkg-searchbar>
+      <pkg-list></pkg-list>
+    </main>
   </body>
 </html>
