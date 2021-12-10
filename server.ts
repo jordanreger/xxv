@@ -35,4 +35,4 @@ async function handler(req: Request): Promise<any> {
   return res;
 }
 
-await serve(handler);
+await serve(handler, { addr: ":6969" });
