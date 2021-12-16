@@ -1,0 +1,43 @@
+{
+  "applicationId": "xxv",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "port": 0,
+  "documentRoot": "/src/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "logging": {
+    "enabled": false,
+    "writeToLogFile": false
+  },
+  "nativeBlockList": [],
+  "modes": {
+    "window": {
+      "title": "xxv",
+      "width": 800,
+      "height": 500,
+      "minWidth": 400,
+      "minHeight": 200,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "icon": "/src/utils/icons/xxvlogo.png",
+      "enableInspector": false,
+      "borderless": false,
+      "maximize": false,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": false
+    },
+    "browser": {},
+    "cloud": {}
+  },
+  "cli": {
+    "binaryName": "xxv",
+    "resourcesPath": "/src/",
+    "extensionsPath": "/extensions/",
+    "clientLibrary": "/src/utils/neutralino.js",
+    "binaryVersion": "1.0.0",
+    "clientVersion": "1.0.0"
+  }
+}
