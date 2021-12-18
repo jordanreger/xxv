@@ -1,0 +1,17 @@
+{
+  "name": "xxv",
+  "short_name": "xxv",
+  "id": "base",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#212121",
+  "description": "launcher",
+  "theme_color": "#e0e0e0",
+  "icons": [
+    {
+      "src": "/base_logo.png",
+      "sizes": "1000x1000",
+      "type": "image/png"
+    }
+  ]
+}
