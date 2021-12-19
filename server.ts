@@ -63,4 +63,4 @@ async function handler(req: Request): Promise<any> {
   return res;
 }
 
-await serve(handler, { addr: ":42069" });
+await serve(handler, { addr: ":6969" });
