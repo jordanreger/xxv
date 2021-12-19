@@ -12,7 +12,7 @@
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!--<script>
+    <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
           navigator.serviceWorker
@@ -20,7 +20,7 @@
             .catch(err => console.log("service worker not registered", err))
         })
       }
-    </script>-->
+    </script>
 
     <!-- PWA -->
 
@@ -37,10 +37,55 @@
     <link rel="stylesheet" href="/main.css" async />
 
   </head>
+  <script name="setup">
+    function hfs(size) {
+      var i = Math.floor( Math.log(size) / Math.log(1024) );
+      return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ['b', 'kb', 'mb'][i];
+    };
+    if ('storage' in navigator && 'estimate' in navigator.storage) {
+      navigator.storage.estimate().then(estimate => {
+        console.log(`app size: ${hfs(estimate.usage)}`);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener("online", () => {
+        console.log("online");
+      });
+
+      window.addEventListener("offline", () => {
+        console.log("offline");
+      });
+      window.resizeTo(475, 600);
+    }, true);
+  </script>
   <script name="pkgSearchBar" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
 
     class pkgSearchBar extends LitElement {
+      static styles = css`
+        .title {
+          font-family: DM Mono;
+          font-size: 4vmin;
+          color: var(--color-secondary-text);
+        }
+
+        input {
+          background-color: transparent;
+          width: 95% !important;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          outline: none;
+          border: 2px solid #c4c4c4;
+          border-radius: 10px;
+          padding: 2.5%;
+          font-size: 3vmin;
+          font-family: DM Mono;
+          color: #c4c4c4;
+        }
+      `;
+
       async handleSubmit(e){
         e.preventDefault();
         let input = this.shadowRoot.children[1].children[0], url = input.value, main = this.parentElement;
@@ -67,23 +112,31 @@
       }
 
       render() {
-        return html`
-        <br/>
-        <form @submit="${(e) => this.handleSubmit(e)}">
-          <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
-          <datalist id="commonpkgs">
-            <option value="https://jordanreger.com/test.json">
-            <option value="https://jordanreger.com/fx.json">
-          </datalist>
-        </form>
-        <br/>
-        `;
+        return html`${navigator.onLine ?
+          html`
+            <span class="title">Import</span>
+            <br/>
+            <br/>
+            <form @submit="${(e) => this.handleSubmit(e)}">
+              <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
+              <datalist id="commonpkgs">
+                <option value="https://jordanreger.com/test.json">
+                <option value="https://jordanreger.com/fx.json">
+              </datalist>
+            </form>
+            <br/>
+          `:
+          html`
+            <span class="title">Offline</span>
+            <br/>
+            <br/>
+          `}`;
       }
     }
     customElements.get("pkg-searchbar") || customElements.define("pkg-searchbar", pkgSearchBar);
   </script>
 
-  <script name="pkgList" type="module">
+  <!--<script name="pkgList" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
 
     class pkgList extends LitElement {
@@ -102,12 +155,16 @@
       }
     }
     customElements.get("pkg-list") || customElements.define("pkg-list", pkgList);
-  </script>
+  </script>-->
 
   <main id="app">
-    <b><code>xxv.package.code</code></b>
-    <pre style="word-wrap: break-word; white-space: pre-wrap">~/</pre>
+
     <pkg-searchbar></pkg-searchbar>
-    <pkg-list></pkg-list>
+    <button onClick="unregisterSW()">unregister</button>
+    <script>
+      function unregisterSW(){
+        navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } })
+      }
+    </script>
   </main>
 </html>
