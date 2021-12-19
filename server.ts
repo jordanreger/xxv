@@ -15,6 +15,11 @@ async function handler(req: Request): Promise<any> {
       file = Deno.readFile("./src/xxv.html");
       ct = "text/html; charset=UTF-8";
       break;
+    case '/process':
+      f = true, r = "";
+      file = Deno.readFile("./src/process.html");
+      ct = "text/html; charset=UTF-8";
+      break;
 
     case '/robots.txt':
       f = true, r = "";
@@ -36,9 +41,9 @@ async function handler(req: Request): Promise<any> {
       file = Deno.readFile("./src/utils/main.css");
       ct = "text/css";
       break;
-    case '/base_logo.png':
+    case '/xxvlogo.png':
       f = true, r = "";
-      file = Deno.readFile("./src/utils/base_logo.png");
+      file = Deno.readFile("./src/utils/xxvlogo.png");
       ct = "image/png";
       break;
 

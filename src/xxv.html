@@ -6,6 +6,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
     />
+    <meta
+      name="theme-color"
+      content="#212121"
+    />
+
+    <title>xxv</title>
 
 
     <!-- PWA -->
@@ -24,8 +30,8 @@
 
     <!-- PWA -->
 
-    <link rel="apple-touch-icon" sizes="1000x1000" href="/base_logo.png" />
-    <link rel="shortcut icon" href="/base_logo.png" />
+    <link rel="apple-touch-icon" sizes="500x500" href="/xxvlogo.png" />
+    <link rel="shortcut icon" href="/xxvlogo.png" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
@@ -49,13 +55,6 @@
     }
 
     window.addEventListener('DOMContentLoaded', function() {
-      window.addEventListener("online", () => {
-        console.log("online");
-      });
-
-      window.addEventListener("offline", () => {
-        console.log("offline");
-      });
       window.resizeTo(475, 600);
     }, true);
   </script>
@@ -88,7 +87,7 @@
 
       async handleSubmit(e){
         e.preventDefault();
-        let input = this.shadowRoot.children[1].children[0], url = input.value, main = this.parentElement;
+        let input = this.shadowRoot.children[3].children[0], url = input.value;
         if(url) {
           let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
             .then((data) => data.json())
@@ -99,12 +98,11 @@
           let js = await fetch(`https://jrcors.herokuapp.com/${res.url}`)
             .then((data) => data.text())
             .then((data) => { return data })
-          console.log(main.children);
-          main.children[1].innerText = resText;
           localStorage.setItem(`${res.pkg}`, `${js}`);
           /*const newDiv = document.createElement("test-element");
           main.appendChild(newDiv);*/
           input.value = "";
+          location.reload();
         } else {
           console.log("please input a valid package url")
         }
@@ -125,42 +123,119 @@
               </datalist>
             </form>
             <br/>
-          `:
-          html`
-            <span class="title">Offline</span>
-            <br/>
-            <br/>
-          `}`;
+          `: null}`;
       }
     }
     customElements.get("pkg-searchbar") || customElements.define("pkg-searchbar", pkgSearchBar);
   </script>
 
-  <!--<script name="pkgList" type="module">
+  <script name="moduleList" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
 
-    class pkgList extends LitElement {
+    class moduleList extends LitElement {
+      static styles = css`
+        .title {
+          font-family: DM Mono;
+          font-size: 4vmin;
+          color: var(--color-secondary-text);
+        }
+
+        input {
+          background-color: transparent;
+          width: 95% !important;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          outline: none;
+          border: 2px solid #c4c4c4;
+          border-radius: 10px;
+          padding: 2.5%;
+          font-size: 3vmin;
+          font-family: DM Mono;
+          color: #c4c4c4;
+        }
+
+        .modules {
+          background-color: transparent;
+          width: 95% !important;
+          height: 65%;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          outline: none;
+          border: 2px solid #c4c4c4;
+          border-radius: 10px;
+          padding: 2.5%;
+          overflow-y: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .module {
+          height: max-content;
+        }
+
+        .arrow {
+          display: inline-block;
+          font-family: DM Mono;
+          color: #c4c4c4;
+          font-weight: bold;
+          font-size: 4vmin;
+          -moz-transform: scale(-1, 1);
+          -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+          user-select: none;
+        }
+
+        .module-name {
+          font-family: DM Sans;
+          color: #e0e0e0;
+          font-weight: bold;
+          font-size: 5vmin;
+          user-select: none;
+        }
+
+        .module-name:hover {
+          color: #ffcf96;
+          cursor: pointer;
+        }
+
+        .module-description {
+          font-family: DM Mono;
+          color: #afafaf;
+          font-size: 4vmin;
+          user-select: none;
+        }
+      `;
+
+      spawnApp(){
+        window.location.href = "/process";
+      }
+
       render() {
-        let pkgList = [];
+        let modulesList = [];
         for(let i = 0; i < window.localStorage.length; i++){
-          pkgList.push(html`<pre style="word-wrap: break-word; white-space: pre-wrap" @click="${() => { let main = this.parentElement; main.children[1].innerText = window.localStorage[Object.keys(window.localStorage)[i]]; }}">— ${Object.keys(window.localStorage)[i]}</pre>`);
+          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${this.spawnApp}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"> —— mockup editor</span></div>`);
         }
         return html`
+          <span class="title">Modules</span>
           <br/>
-          <b><code>xxv.package</code></b>
-          ${pkgList}
           <br/>
-          <button @click="${() => { localStorage.clear(); location.reload(); }}">clear</button>
+          <div class="modules">
+            ${modulesList}
+          </div>
         `;
       }
     }
-    customElements.get("pkg-list") || customElements.define("pkg-list", pkgList);
-  </script>-->
+    customElements.get("module-list") || customElements.define("module-list", moduleList);
+  </script>
 
   <main id="app">
-
     <pkg-searchbar></pkg-searchbar>
-    <button onClick="unregisterSW()">unregister</button>
+    <module-list></module-list>
+    <!--<button onClick="unregisterSW()">unregister</button>-->
     <script>
       function unregisterSW(){
         navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } })

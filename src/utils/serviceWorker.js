@@ -2,7 +2,7 @@ const page = "xxv.network"
 const assets = [
   "/",
   "/main.css",
-  "/base_logo.png",
+  "/xxvlogo.png",
 ]
 
 self.addEventListener("install", installEvent => {
