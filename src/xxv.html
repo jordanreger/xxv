@@ -158,8 +158,9 @@
         .modules {
           background-color: transparent;
           width: 95% !important;
-          height: 65%;
-          position: relative;
+          bottom: 0;
+          position: absolute;
+          top: 30%;
           left: 50%;
           transform: translateX(-50%);
           outline: none;
@@ -211,7 +212,7 @@
       `;
 
       spawnApp(){
-        window.open("/process", "test", ["popup", "noopener"]);
+        window.open("/process", "test", "popup,noopener");
       }
 
       render() {

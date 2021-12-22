@@ -11,55 +11,7 @@
       content="#212121"
     />
 
-    <title>xxv</title>
-
-
-    <!-- PWA -->
-
-    <link rel="manifest" href="/manifest.webmanifest" />
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-          navigator.serviceWorker
-            .register("/service-worker.js")
-            .catch(err => console.log("service worker not registered", err))
-        })
-      }
-    </script>
-
-    <!-- PWA -->
-
-    <link rel="apple-touch-icon" sizes="500x500" href="/xxvlogo.png" />
-    <link rel="shortcut icon" href="/xxvlogo.png" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
-    </noscript>
-
-    <link rel="stylesheet" href="/main.css" async />
-
   </head>
-  <script name="setup">
-    function hfs(size) {
-      var i = Math.floor( Math.log(size) / Math.log(1024) );
-      return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ['b', 'kb', 'mb'][i];
-    };
-    if ('storage' in navigator && 'estimate' in navigator.storage) {
-      navigator.storage.estimate().then(estimate => {
-        console.log(`app size: ${hfs(estimate.usage)}`);
-      });
-    }
 
-    window.addEventListener('DOMContentLoaded', function() {
-      window.resizeTo(475, 600);
-    }, true);
-  </script>
-
-  <main id="app">
-    <a href="/" class="title">←</a> <span class="title">process</span>
-  </main>
+  <object type="text/html" data="https://jordanreger.com/base" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;"></object>
 </html>
