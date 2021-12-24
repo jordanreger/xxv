@@ -54,6 +54,7 @@ async function handler(req: Request): Promise<any> {
 
     case route('/module/.', path):
       let mod = path.split("/module/")[1];
+      console.log(await Deno.stat(`./.modules/${mod}.html`));
       /*try {
         if(await Deno.stat(`./.modules/${mod}.html`)){
           file = Deno.readFile(`./.modules/${mod}.html`);
