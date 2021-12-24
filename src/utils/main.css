@@ -44,6 +44,7 @@ a:hover {
   top: 5vmin;
   right: 5vmin;
   bottom: 5vmin;
+  background-color: #000;
 }
 
 .title {
