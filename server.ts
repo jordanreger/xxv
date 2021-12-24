@@ -1,5 +1,12 @@
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
-import { route } from "./router.ts";
+
+const route = (route:string, path: string) => {
+  let regexRoute = new RegExp(route, "gmi");
+  if(regexRoute.test(path)){
+    return path;
+  }
+}
+
 
 async function handler(req: Request): Promise<any> {
   let path = (function(){
