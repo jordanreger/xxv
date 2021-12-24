@@ -8,7 +8,7 @@
   --color-secondary-text: #c4c4c4;
   --color-tertiary-text: #696969;
 
-  --color-primary-bg: #212121;
+  --color-primary-bg: #000;
   --color-secondary-bg: #424242;
   --color-tertiary-bg: #ffcf96;
 
@@ -16,10 +16,6 @@
 
   --weight-heavy: bold;
   --weight-regular: normal;
-}
-
-html {
-  background: var(--color-primary-bg);
 }
 
 ::-moz-selection {

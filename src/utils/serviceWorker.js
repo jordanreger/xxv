@@ -1,7 +1,7 @@
 const page = "xxv.network"
 const assets = [
   "/",
-  "https://jrcors.herokuapp.com/https://jordanreger.com/base",
+  "/process",
   "/main.css",
   "/xxvlogo.png",
 ]

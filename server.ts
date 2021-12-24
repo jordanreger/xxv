@@ -1,8 +1,11 @@
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
+import { route } from "./router.ts";
 
 async function handler(req: Request): Promise<any> {
   let path = (function(){
-    let url = req.url.split("/"), path = `/${url[url.length - 1]}`;
+    let url = req.url.split("/"), path = "";
+    url.splice(0, 3);
+    for(let i = 0; i < url.length; i++){path = path.concat(`/${url[i]}`);}
     return path;
   })();
 
@@ -46,6 +49,19 @@ async function handler(req: Request): Promise<any> {
       file = Deno.readFile("./src/utils/xxvlogo.png");
       ct = "image/png";
       break;
+
+    case route('/x/.', path):
+      let pkg = path.split("/x/")[1];
+      if(pkg.includes('https://xxv.network/')){
+        console.log(pkg);
+      }
+      file = await fetch(pkg)
+        .then((data) => data.text())
+        .then((data) => { return data })
+      f = true, r = "";
+      ct = "text/html; charset=UTF-8";
+      break;
+
 
     default:
       f = true, r = "";

@@ -18,7 +18,7 @@
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <script>
+    <!--<script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
           navigator.serviceWorker
@@ -26,7 +26,7 @@
             .catch(err => console.log("service worker not registered", err))
         })
       }
-    </script>
+    </script>-->
 
     <!-- PWA -->
 
@@ -95,10 +95,13 @@
           let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
             .then((data) => data.json())
             .then((data) => { return data })
-          let js = await fetch(`https://jrcors.herokuapp.com/${res.url}`)
-            .then((data) => data.text())
-            .then((data) => { return data })
-          localStorage.setItem(`${res.pkg}`, `${js}`);
+          fetch(res.url).then(function(response) {
+            if (!response.ok) {
+              throw new TypeError('bad response status');
+            }
+            return cache.put(url, response);
+          })
+          localStorage.setItem(`${res.pkg}`, `${res.url}`);
           /*const newDiv = document.createElement("test-element");
           main.appendChild(newDiv);*/
           input.value = "";

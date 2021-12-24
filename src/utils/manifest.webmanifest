@@ -4,12 +4,9 @@
   "id": "base",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#212121",
+  "background_color": "#e0e0e0",
   "description": "launcher",
-  "theme_color": "#e0e0e0",
-  "display_override": [
-    "window-controls-overlay"
-  ],
+  "theme_color": "#000",
   "icons": [
     {
       "src": "/xxvlogo.png",
