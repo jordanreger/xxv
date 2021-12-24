@@ -18,7 +18,7 @@
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <script>
+    <!--<script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
           navigator.serviceWorker
@@ -26,7 +26,7 @@
             .catch(err => console.log("service worker not registered", err))
         })
       }
-    </script>
+    </script>-->
 
     <!-- PWA -->
 
@@ -39,12 +39,6 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
     </noscript>
-
-    <style>
-      html {
-        background-color: #000;
-      }
-    </style>
 
     <link rel="stylesheet" href="/main.css" async />
 
@@ -93,16 +87,27 @@
 
       async handleSubmit(e){
         e.preventDefault();
-        let input = this.shadowRoot.children[3].children[0], mod = input.value;
-        if(mod) {
-          let res = await fetch(`/module/${mod}`)
-            .then((data) => data.text())
+        let input = this.shadowRoot.children[3].children[0], url = input.value;
+        if(url) {
+          let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
+            .then((data) => data.json())
+            .then((data) => { return JSON.stringify(data, null, 2) })
+          let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
+            .then((data) => data.json())
             .then((data) => { return data })
-          localStorage.setItem(`${mod}`, `https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`);
+          fetch(res.url).then(function(response) {
+            if (!response.ok) {
+              throw new TypeError('bad response status');
+            }
+            return cache.put(url, response);
+          })
+          localStorage.setItem(`${res.pkg}`, `${res.url}`);
+          /*const newDiv = document.createElement("test-element");
+          main.appendChild(newDiv);*/
           input.value = "";
           location.reload();
         } else {
-          console.log("please input a valid module name");
+          console.log("please input a valid package url")
         }
 
       }
@@ -114,10 +119,10 @@
             <br/>
             <br/>
             <form @submit="${(e) => this.handleSubmit(e)}">
-              <input type="text" placeholder="module" name="modules" list="commonmods" />
-              <datalist id="commonmods">
-                <option value="base">
-                <option value="fx">
+              <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
+              <datalist id="commonpkgs">
+                <option value="https://jordanreger.com/test.json">
+                <option value="https://jordanreger.com/fx.json">
               </datalist>
             </form>
             <br/>
@@ -209,14 +214,14 @@
         }
       `;
 
-      spawnApp(mod){
-        window.open(`/module/${mod}`, "test", "popup,noopener");
+      spawnApp(){
+        window.open("/process", "test", "popup,noopener");
       }
 
       render() {
         let modulesList = [];
         for(let i = 0; i < window.localStorage.length; i++){
-          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"> —— mockup editor</span></div>`);
+          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${this.spawnApp}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"> —— mockup editor</span></div>`);
         }
         return html`
           <span class="title">Modules</span>

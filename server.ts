@@ -25,6 +25,11 @@ async function handler(req: Request): Promise<any> {
       file = Deno.readFile("./src/xxv.html");
       ct = "text/html; charset=UTF-8";
       break;
+    case '/process':
+      f = true, r = "";
+      file = Deno.readFile("./src/process.html");
+      ct = "text/html; charset=UTF-8";
+      break;
 
     case '/robots.txt':
       f = true, r = "";
@@ -52,6 +57,7 @@ async function handler(req: Request): Promise<any> {
       ct = "image/png";
       break;
 
+<<<<<<< HEAD
     case route('/module/.', path):
       let mod = path.split("/module/")[1];
       console.log(await Deno.stat(`./.modules/${mod}.html`));
@@ -72,6 +78,9 @@ async function handler(req: Request): Promise<any> {
       break;
 
     /*case route('/x/.', path):
+=======
+    case route('/x/.', path):
+>>>>>>> parent of 016d36d... prerelease
       let pkg = path.split("/x/")[1];
       if(pkg.includes('https://xxv.network/')){
         console.log(pkg);
@@ -81,7 +90,7 @@ async function handler(req: Request): Promise<any> {
         .then((data) => { return data })
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
-      break;*/
+      break;
 
 
     default:

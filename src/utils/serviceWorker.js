@@ -1,7 +1,7 @@
 const page = "xxv.network"
 const assets = [
   "/",
-  "/module",
+  "/process",
   "/main.css",
   "/xxvlogo.png",
 ]
