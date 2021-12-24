@@ -7,6 +7,9 @@
   "background_color": "#212121",
   "description": "launcher",
   "theme_color": "#e0e0e0",
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "icons": [
     {
       "src": "/xxvlogo.png",

@@ -21,12 +21,6 @@ async function handler(req: Request): Promise<any> {
       ct = "text/html; charset=UTF-8";
       break;
 
-    case '/base':
-      f = false, r = "https://jrcors.herokuapp.com/https://jordanreger.com/base";
-      file = "";
-      ct = "";
-      break;
-
     case '/robots.txt':
       f = true, r = "";
       file = "User-agent: * Disallow:";
