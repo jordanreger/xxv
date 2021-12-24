@@ -54,7 +54,7 @@ async function handler(req: Request): Promise<any> {
 
     case route('/module/.', path):
       let mod = path.split("/module/")[1];
-      try {
+      /*try {
         if(await Deno.stat(`./.modules/${mod}.html`)){
           file = Deno.readFile(`./.modules/${mod}.html`);
         }
@@ -64,7 +64,8 @@ async function handler(req: Request): Promise<any> {
           .then((data) => { return data })
         Deno.writeTextFile(`./.modules/${mod}.html`, data);
         file = `installed ${mod}`;
-      }
+      }*/
+      file = "test";
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
       break;
