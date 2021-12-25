@@ -1,3 +1,2 @@
-dev.sh
 .modules/*
 !.modules/readme.md
