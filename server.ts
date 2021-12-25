@@ -99,3 +99,4 @@ async function handler(req: Request): Promise<any> {
 }
 
 await serve(handler, { addr: ":6969" });
+console.log("http://localhost:6969");
