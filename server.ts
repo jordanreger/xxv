@@ -8,17 +8,14 @@ async function handler(req: Request): Promise<any> {
     for(let i = 0; i < url.length; i++){path = path.concat(`/${url[i]}`);}
     return path;
   })();
+
   let file, ct, f, r;
+
   switch(path){
     // PAGES
     case '/':
       f = true, r = "";
       file = Deno.readFile("./src/xxv.html");
-      ct = "text/html; charset=UTF-8";
-      break;
-    case '/process':
-      f = true, r = "";
-      file = Deno.readFile("./src/process.html");
       ct = "text/html; charset=UTF-8";
       break;
 
@@ -48,7 +45,24 @@ async function handler(req: Request): Promise<any> {
       ct = "image/png";
       break;
 
-    case route('/x/.', path):
+    case route('/module/.', path):
+      let mod = path.split("/module/")[1];
+      try {
+        if(await Deno.stat(`./.modules/${mod}.html`)){
+          file = Deno.readFile(`./.modules/${mod}.html`);
+        }
+      } catch (error) {
+        let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
+          .then((data) => data.text())
+          .then((data) => { return data })
+        Deno.writeTextFile(`./.modules/${mod}.html`, data);
+        file = `installed ${mod}`;
+      }
+      f = true, r = "";
+      ct = "text/html; charset=UTF-8";
+      break;
+
+    /*case route('/x/.', path):
       let pkg = path.split("/x/")[1];
       if(pkg.includes('https://xxv.network/')){
         console.log(pkg);
@@ -58,7 +72,7 @@ async function handler(req: Request): Promise<any> {
         .then((data) => { return data })
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
-      break;
+      break;*/
 
 
     default:
@@ -66,7 +80,9 @@ async function handler(req: Request): Promise<any> {
       file = Deno.readFile("./src/utils/404.html");
       ct = "text/html; charset=UTF-8";
   }
+
   let res;
+
   if(f){
     res = new Response(await file, {
       headers: {
@@ -76,5 +92,8 @@ async function handler(req: Request): Promise<any> {
   } else {
     res = Response.redirect(r, 302);
   }
+
   return res;
 }
+
+await serve(handler, { addr: ":6969" });

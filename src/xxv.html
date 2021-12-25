@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
@@ -9,12 +10,15 @@
       name="theme-color"
       content="#212121"
     />
+
     <title>xxv</title>
+
+
     <!-- PWA -->
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!--<script>
+    <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
           navigator.serviceWorker
@@ -22,18 +26,25 @@
             .catch(err => console.log("service worker not registered", err))
         })
       }
-    </script>-->
+    </script>
 
     <!-- PWA -->
 
     <link rel="apple-touch-icon" sizes="500x500" href="/xxvlogo.png" />
     <link rel="shortcut icon" href="/xxvlogo.png" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
     </noscript>
+
+    <style>
+      html {
+        background-color: #000;
+      }
+    </style>
 
     <link rel="stylesheet" href="/main.css" async />
 
@@ -48,12 +59,14 @@
         console.log(`app size: ${hfs(estimate.usage)}`);
       });
     }
+
     window.addEventListener('DOMContentLoaded', function() {
       window.resizeTo(475, 600);
     }, true);
   </script>
   <script name="pkgSearchBar" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
+
     class pkgSearchBar extends LitElement {
       static styles = css`
         .title {
@@ -61,6 +74,7 @@
           font-size: 4vmin;
           color: var(--color-secondary-text);
         }
+
         input {
           background-color: transparent;
           width: 95% !important;
@@ -79,30 +93,20 @@
 
       async handleSubmit(e){
         e.preventDefault();
-        let input = this.shadowRoot.children[3].children[0], url = input.value;
-        if(url) {
-          let resText = await fetch(`https://jrcors.herokuapp.com/${url}`)
-            .then((data) => data.json())
-            .then((data) => { return JSON.stringify(data, null, 2) })
-          let res = await fetch(`https://jrcors.herokuapp.com/${url}`)
-            .then((data) => data.json())
+        let input = this.shadowRoot.children[3].children[0], mod = input.value;
+        if(mod) {
+          let res = await fetch(`/module/${mod}`)
+            .then((data) => data.text())
             .then((data) => { return data })
-          fetch(res.url).then(function(response) {
-            if (!response.ok) {
-              throw new TypeError('bad response status');
-            }
-            return cache.put(url, response);
-          })
-          localStorage.setItem(`${res.pkg}`, `${res.url}`);
-          /*const newDiv = document.createElement("test-element");
-          main.appendChild(newDiv);*/
+          localStorage.setItem(`${mod}`, `https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`);
           input.value = "";
           location.reload();
         } else {
-          console.log("please input a valid package url")
+          console.log("please input a valid module name");
         }
 
       }
+
       render() {
         return html`${navigator.onLine ?
           html`
@@ -110,10 +114,10 @@
             <br/>
             <br/>
             <form @submit="${(e) => this.handleSubmit(e)}">
-              <input type="url" placeholder="/pkg" name="pkg" list="commonpkgs" />
-              <datalist id="commonpkgs">
-                <option value="https://jordanreger.com/test.json">
-                <option value="https://jordanreger.com/fx.json">
+              <input type="text" placeholder="module" name="modules" list="commonmods" />
+              <datalist id="commonmods">
+                <option value="base">
+                <option value="fx">
               </datalist>
             </form>
             <br/>
@@ -122,8 +126,10 @@
     }
     customElements.get("pkg-searchbar") || customElements.define("pkg-searchbar", pkgSearchBar);
   </script>
+
   <script name="moduleList" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
+
     class moduleList extends LitElement {
       static styles = css`
         .title {
@@ -131,6 +137,7 @@
           font-size: 4vmin;
           color: var(--color-secondary-text);
         }
+
         input {
           background-color: transparent;
           width: 95% !important;
@@ -145,6 +152,7 @@
           font-family: DM Mono;
           color: #c4c4c4;
         }
+
         .modules {
           background-color: transparent;
           width: 95% !important;
@@ -159,12 +167,15 @@
           padding: 2.5%;
           overflow-y: scroll;
         }
+
         ::-webkit-scrollbar {
             width: 0;
         }
+
         .module {
           height: max-content;
         }
+
         .arrow {
           display: inline-block;
           font-family: DM Mono;
@@ -176,6 +187,7 @@
           transform: scale(-1, 1);
           user-select: none;
         }
+
         .module-name {
           font-family: DM Sans;
           color: #e0e0e0;
@@ -183,10 +195,12 @@
           font-size: 5vmin;
           user-select: none;
         }
+
         .module-name:hover {
           color: #ffcf96;
           cursor: pointer;
         }
+
         .module-description {
           font-family: DM Mono;
           color: #afafaf;
@@ -195,14 +209,14 @@
         }
       `;
 
-      spawnApp(){
-        window.open("/process", "test", "popup,noopener");
+      spawnApp(mod){
+        window.open(`/module/${mod}`, "test", "popup,noopener");
       }
 
       render() {
         let modulesList = [];
         for(let i = 0; i < window.localStorage.length; i++){
-          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${this.spawnApp}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"> —— mockup editor</span></div>`);
+          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"> —— mockup editor</span></div>`);
         }
         return html`
           <span class="title">Modules</span>
@@ -216,6 +230,7 @@
     }
     customElements.get("module-list") || customElements.define("module-list", moduleList);
   </script>
+
   <main id="app">
     <pkg-searchbar></pkg-searchbar>
     <module-list></module-list>
