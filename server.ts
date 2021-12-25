@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 import { route } from "./router.ts";
 
-console.log("xxv —— the future is light.");
+console.log("xxv —— the future is light.\n\nhttp://localhost:6969");
 
 async function handler(req: Request): Promise<any> {
   let path = (function(){
@@ -99,4 +99,3 @@ async function handler(req: Request): Promise<any> {
 }
 
 await serve(handler, { addr: ":6969" });
-console.log("http://localhost:6969");
