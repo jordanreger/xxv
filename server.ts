@@ -1,6 +1,8 @@
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 import { route } from "./router.ts";
 
+console.log("xxv —— the future is light.");
+
 async function handler(req: Request): Promise<any> {
   let path = (function(){
     let url = req.url.split("/"), path = "";
