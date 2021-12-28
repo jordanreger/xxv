@@ -95,10 +95,11 @@
         e.preventDefault();
         let input = this.shadowRoot.children[3].children[0], mod = input.value;
         if(mod) {
-          let res = await fetch(`/module/${mod}`)
-            .then((data) => data.text())
+          let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
+            .then((data) => data.arrayBuffer())
             .then((data) => { return data })
-          localStorage.setItem(`${mod}`, `https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`);
+          data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
+          localStorage.setItem(mod, data);
           input.value = "";
           location.reload();
         } else {
@@ -210,7 +211,7 @@
       `;
 
       spawnApp(mod){
-        window.open(`/module/${mod}`, "test", "popup,noopener");
+        window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
       }
 
       render() {

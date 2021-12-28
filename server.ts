@@ -2,12 +2,8 @@ import { serve } from "https://deno.land/std/http/server.ts";
 import { route } from "./router.ts";
 
 async function handler(req: Request): Promise<any> {
-  let path = (function(){
-    let url = req.url.split("/"), path = "";
-    url.splice(0, 3);
-    for(let i = 0; i < url.length; i++){path = path.concat(`/${url[i]}`);}
-    return path;
-  })();
+  let url = new URL(req.url);
+  let path = url.pathname, params = new URLSearchParams(url.search);
 
   let file, ct, f, r;
 
@@ -45,31 +41,12 @@ async function handler(req: Request): Promise<any> {
       ct = "image/png";
       break;
 
-    case route('/module/.', path):
-      let mod = path.split("/module/")[1];
-      let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
-        .then((data) => data.text())
-        .then((data) => { return data })
-      //Deno.writeTextFile(`./.modules/${mod}.html`, data);
-      data = btoa(data);
-      //localStorage.setItem(mod, data);
-      file = `<object data="data:text/html;base64,${data}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
+    case '/module':
+      let b64 = params.get("data");
+      file = `<object data="data:text/html;base64,${b64}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
       break;
-
-    /*case route('/x/.', path):
-      let pkg = path.split("/x/")[1];
-      if(pkg.includes('https://xxv.network/')){
-        console.log(pkg);
-      }
-      file = await fetch(pkg)
-        .then((data) => data.text())
-        .then((data) => { return data })
-      f = true, r = "";
-      ct = "text/html; charset=UTF-8";
-      break;*/
-
 
     default:
       f = true, r = "";
