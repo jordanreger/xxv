@@ -45,35 +45,15 @@ async function handler(req: Request): Promise<any> {
       ct = "image/png";
       break;
 
-    case '/ls':
-      console.log(localStorage);
-      f = true, r = "";
-      file = "localStorage";
-      ct = "text/html; charset=UTF-8";
-      break;
-
-    case route('/rm/.', path):
-      let rmmod = path.split("/rm/")[1];
-      localStorage.removeItem(rmmod);
-
-      file = "removed";
-      f = true, r = "";
-      ct = "text/html; charset=UTF-8";
-      break;
-
     case route('/module/.', path):
-      let mod = path.split("/module/")[1], downloaded = localStorage.getItem(mod);
-      if(downloaded){
-        file = `<object data="data:text/html;base64,${downloaded}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
-      } else {
-        let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
-          .then((data) => data.text())
-          .then((data) => { return data })
-        //Deno.writeTextFile(`./.modules/${mod}.html`, data);
-        data = btoa(data);
-        localStorage.setItem(mod, data);
-        file = `${data}`;
-      }
+      let mod = path.split("/module/")[1];
+      let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
+        .then((data) => data.text())
+        .then((data) => { return data })
+      //Deno.writeTextFile(`./.modules/${mod}.html`, data);
+      data = btoa(data);
+      //localStorage.setItem(mod, data);
+      file = `<object data="data:text/html;base64,${data}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
       break;
@@ -112,4 +92,4 @@ async function handler(req: Request): Promise<any> {
   return res;
 }
 
-await serve(handler, { addr: ":6969" });
+await serve(handler);
