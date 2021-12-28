@@ -42,8 +42,8 @@ async function handler(req: Request): Promise<any> {
       break;
 
     case '/module':
-      let b64 = params.get("data");
-      file = `<object data="data:text/html;base64,${b64}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
+      const data = String(params.get("data"));
+      file = `<object data="data:text/html;base64,${decodeURI(data)}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
       break;
