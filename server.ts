@@ -48,7 +48,7 @@ async function handler(req: Request): Promise<any> {
     case '/ls':
       console.log(localStorage);
       f = true, r = "";
-      file = "ls";
+      file = "localStorage";
       ct = "text/html; charset=UTF-8";
       break;
 
