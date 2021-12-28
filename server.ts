@@ -2,7 +2,12 @@ import { serve } from "https://deno.land/std/http/server.ts";
 import { route } from "./router.ts";
 
 async function handler(req: Request): Promise<any> {
-  let path = new URL(req.url).pathname;
+  let path = (function(){
+    let url = req.url.split("/"), path = "";
+    url.splice(0, 3);
+    for(let i = 0; i < url.length; i++){path = path.concat(`/${url[i]}`);}
+    return path;
+  })();
 
   let file, ct, f, r;
 
