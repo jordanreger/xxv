@@ -51,7 +51,9 @@ async function handler(req: Request): Promise<any> {
       let mod = path.split("/module/")[1];
       try {
         if(await Deno.stat(`./.modules/${mod}.html`)){
-          file = Deno.readFile(`./.modules/${mod}.html`);
+          file = await Deno.readFile(`./.modules/${mod}.html`);
+          const b64 = btoa(String.fromCharCode(...new Uint8Array(file)));
+          file = `<object data="data:text/html;base64,${b64}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
         }
       } catch (error) {
         let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
