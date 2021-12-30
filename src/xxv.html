@@ -8,7 +8,7 @@
     />
     <meta
       name="theme-color"
-      content="#212121"
+      content="#000"
     />
 
     <title>xxv</title>
@@ -34,10 +34,10 @@
     <link rel="shortcut icon" href="/xxvlogo.png" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" />
     </noscript>
 
     <style>
@@ -64,36 +64,40 @@
       window.resizeTo(475, 600);
     }, true);
   </script>
-  <script name="pkgSearchBar" type="module">
+  <script name="importBar" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
 
-    class pkgSearchBar extends LitElement {
+    class importBar extends LitElement {
       static styles = css`
-        .title {
-          font-family: DM Mono;
-          font-size: 4vmin;
-          color: var(--color-secondary-text);
+        ::-moz-selection {
+          color: #000;
+          background: #ffcf96;
+        }
+
+        ::selection {
+          color: #000;
+          background: #ffcf96;
         }
 
         input {
+          border: none;
+          outline: 2px solid #c4c4c4;
           background-color: transparent;
-          width: 95% !important;
-          position: relative;
-          left: 50%;
-          transform: translateX(-50%);
-          outline: none;
-          border: 2px solid #c4c4c4;
+          position: absolute;
+          width: 100%;
+          height: 100%;
           border-radius: 10px;
-          padding: 2.5%;
-          font-size: 3vmin;
-          font-family: DM Mono;
           color: #c4c4c4;
+          font-family: IBM Plex Mono;
+          box-sizing: border-box;
+          padding-left: 3vmin;
+          font-size: 4vmin;
         }
       `;
 
       async handleSubmit(e){
         e.preventDefault();
-        let input = this.shadowRoot.children[3].children[0], mod = input.value;
+        let input = this.shadowRoot.children[0].children[0], mod = input.value;
         if(mod) {
           let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.html`)
             .then((data) => data.arrayBuffer())
@@ -104,7 +108,7 @@
           })
           localStorage.setItem(mod, data);
           input.value = "";
-          //location.reload();
+          location.reload();
         } else {
           console.log("please input a valid module name");
         }
@@ -114,90 +118,51 @@
       render() {
         return html`${navigator.onLine ?
           html`
-            <span class="title">Import</span>
-            <br/>
-            <br/>
             <form @submit="${(e) => this.handleSubmit(e)}">
               <input type="text" placeholder="module" name="modules" list="commonmods" />
               <datalist id="commonmods">
                 <option value="base">
-                <option value="fx">
+                <option value="about">
               </datalist>
             </form>
             <br/>
           `: null}`;
       }
     }
-    customElements.get("pkg-searchbar") || customElements.define("pkg-searchbar", pkgSearchBar);
+    customElements.get("import-bar") || customElements.define("import-bar", importBar);
   </script>
 
-  <script name="moduleList" type="module">
+  <script name="moduleBox" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
 
-    class moduleList extends LitElement {
+    class moduleBox extends LitElement {
       static styles = css`
-        .title {
-          font-family: DM Mono;
-          font-size: 4vmin;
-          color: var(--color-secondary-text);
-        }
-
-        input {
-          background-color: transparent;
-          width: 95% !important;
-          position: relative;
-          left: 50%;
-          transform: translateX(-50%);
-          outline: none;
-          border: 2px solid #c4c4c4;
-          border-radius: 10px;
-          padding: 2.5%;
-          font-size: 3vmin;
-          font-family: DM Mono;
-          color: #c4c4c4;
-        }
-
         .modules {
-          background-color: transparent;
-          width: 95% !important;
-          bottom: 0;
-          position: absolute;
-          top: 30%;
-          left: 50%;
-          transform: translateX(-50%);
-          outline: none;
-          border: 2px solid #c4c4c4;
-          border-radius: 10px;
-          padding: 2.5%;
-          overflow-y: scroll;
+          padding: 3vmin;
+          user-select: none;
         }
 
         ::-webkit-scrollbar {
             width: 0;
         }
 
-        .module {
-          height: max-content;
-        }
-
         .arrow {
           display: inline-block;
-          font-family: DM Mono;
-          color: #c4c4c4;
-          font-weight: bold;
+          font-family: IBM Plex Mono;
           font-size: 4vmin;
           -moz-transform: scale(-1, 1);
           -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1);
           user-select: none;
+          color: #696969;
         }
 
         .module-name {
-          font-family: DM Sans;
-          color: #e0e0e0;
+          font-family: IBM Plex Mono;
           font-weight: bold;
           font-size: 5vmin;
           user-select: none;
+          color: #e0e0e0;
         }
 
         .module-name:hover {
@@ -206,10 +171,10 @@
         }
 
         .module-description {
-          font-family: DM Mono;
-          color: #afafaf;
+          font-family: IBM Plex Mono;
           font-size: 4vmin;
           user-select: none;
+          color: #c4c4c4;
         }
       `;
 
@@ -223,21 +188,20 @@
           modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span></div>`);
         }
         return html`
-          <span class="title">Modules</span>
-          <br/>
-          <br/>
           <div class="modules">
             ${modulesList}
           </div>
         `;
       }
     }
-    customElements.get("module-list") || customElements.define("module-list", moduleList);
+    customElements.get("modules-box") || customElements.define("modules-box", moduleBox);
   </script>
 
   <main id="app">
-    <pkg-searchbar></pkg-searchbar>
-    <module-list></module-list>
+    <div class="import-title">Import</div>
+    <import-bar class="import-bar"></import-bar>
+    <div class="modules-title">Modules</div>
+    <modules-box class="modules-box"></modules-box>
     <!--<button onClick="unregisterSW()">unregister</button>-->
     <script>
       function unregisterSW(){

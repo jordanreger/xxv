@@ -1,31 +1,11 @@
-:root {
-  --font-title: DM Sans;
-  --font-text: Inter;
-  --font-subtext: DM Mono;
-
-
-  --color-primary-text: #e0e0e0;
-  --color-secondary-text: #c4c4c4;
-  --color-tertiary-text: #696969;
-
-  --color-primary-bg: #000;
-  --color-secondary-bg: #424242;
-  --color-tertiary-bg: #ffcf96;
-
-  --color-shadow-low: rgba(49, 49, 49, 0.5);
-
-  --weight-heavy: bold;
-  --weight-regular: normal;
-}
-
 ::-moz-selection {
-  color: var(--color-primary-bg);
-  background: var(--color-tertiary-bg);
+  color: #000;
+  background: #ffcf96;
 }
 
 ::selection {
-  color: var(--color-primary-bg);
-  background: var(--color-tertiary-bg);
+  color: #000;
+  background: #ffcf96;
 }
 
 a {
@@ -34,44 +14,81 @@ a {
 }
 
 a:hover {
-  color: var(--color-tertiary-bg);
+  color: #ffcf96;
   cursor: pointer;
 }
 
 #app {
+  background-color: #000;
   position: absolute;
+  height: auto;
   left: 5vmin;
   top: 5vmin;
   right: 5vmin;
   bottom: 5vmin;
-  background-color: #000;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.75fr 1.25fr 0.75fr 7.25fr;
+  gap: 0.5em 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "import-title"
+    "import-bar"
+    "modules-title"
+    "modules-box";
 }
 
-.title {
-  font-family: DM Mono;
-  font-size: 4vmin;
-  color: var(--color-secondary-text);
-}
-
-#process {
+.import-title {
+  grid-area: import-title;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  font-family: Space Grotesk;
+  font-size: 5vmin;
+  user-select: none;
+  color: #e0e0e0;
 }
 
-/*#pkg-searchbar-frame {
-  background-color: transparent;
-  width: 95% !important;
+.import-bar {
+  grid-area: import-bar;
   position: absolute;
-  top: 8.5vmin;
-  left: 50%;
-  height: 4vmin;
-  transform: translateX(-50%);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  outline: 2px solid #c4c4c4;
+  border-radius: 10px;
+}
+
+.modules-title {
+  grid-area: modules-title;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Space Grotesk;
+  font-size: 5vmin;
+  user-select: none;
+  color: #e0e0e0;
+}
+
+.modules-box {
+  grid-area: modules-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
   outline: none;
   border: 2px solid #c4c4c4;
   border-radius: 10px;
-  padding: 2.5%;
-  z-index: -1;
-}*/
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
