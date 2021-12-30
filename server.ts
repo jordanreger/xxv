@@ -43,6 +43,7 @@ async function handler(req: Request): Promise<any> {
 
     case '/module':
       const data = String(params.get("data"));
+      data = data.replace(" ", "+");
       file = `<object data="data:text/html;base64,${decodeURIComponent(data)}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`;
       f = true, r = "";
       ct = "text/html; charset=UTF-8";
