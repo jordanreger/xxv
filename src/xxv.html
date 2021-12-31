@@ -107,15 +107,14 @@
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
               for(let registration of registrations) {
                 registration.unregister()
-              }}).catch(function(err) {
-                  console.log('Service Worker unregistration failed: ', err);
-              });
-            caches.open('xxv.network').then(cache => {
-              cache.add(`/module?data=${data}`);
-            })
-            localStorage.setItem(mod, data);
-            input.value = "";
-            location.reload();
+              }}).then(() => {
+                caches.open('xxv.network').then(cache => {
+                  cache.add(`/module?data=${data}`);
+                })
+                localStorage.setItem(mod, data);
+                input.value = "";
+                location.reload();
+              })
           }
         } else {
           console.log("please input a valid module name");
