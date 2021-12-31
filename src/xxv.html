@@ -103,7 +103,6 @@
             .then((data) => data.arrayBuffer())
             .then((data) => { return data })
           data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
-          console.log(data);
           console.log(decodeURIComponent(data));
           caches.open('xxv.network').then(cache => {
             cache.add(`/module?data=${data}`);
