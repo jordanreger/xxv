@@ -183,16 +183,47 @@
           user-select: none;
           color: #c4c4c4;
         }
+
+        .separator {
+          font-family: IBM Plex Mono;
+          font-size: 4vmin;
+          user-select: none;
+          color: #424242;
+        }
+
+        .delete {
+          font-family: IBM Plex Mono;
+          font-size: 4.5vmin;
+          user-select: none;
+          color: #212121;
+        }
+
+        .delete:hover {
+          font-family: IBM Plex Mono;
+          font-size: 4.5vmin;
+          user-select: none;
+          cursor: pointer;
+          color: #424242;
+        }
       `;
 
       spawnApp(mod){
         window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
       }
 
+      deleteApp(mod){
+        caches.open('xxv.network').then(cache => {
+          cache.delete(`/module?data=${localStorage.getItem(mod)}`).then(function(response){
+            localStorage.removeItem(mod);
+            location.reload();
+          })
+        });
+      }
+
       render() {
         let modulesList = [];
         for(let i = 0; i < window.localStorage.length; i++){
-          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span></div>`);
+          modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span><span class="separator"> — </span><span class="delete" @click=${() => { this.deleteApp(Object.keys(window.localStorage)[i])}}>delete</span></div>`);
         }
         return html`
           <div class="modules">
