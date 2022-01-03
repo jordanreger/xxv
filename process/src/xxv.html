@@ -63,6 +63,19 @@
     window.addEventListener('DOMContentLoaded', function() {
       window.resizeTo(475, 600);
     }, true);
+
+    document.addEventListener('keydown', function (event) {
+      let input = document.getElementById("import-bar").shadowRoot.children[0].children[0];
+      if (event.key === '/') {
+        event.preventDefault();
+        input.focus();
+        input.value = "";
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', function() {
+      window.resizeTo(475, 600);
+    }, true);
   </script>
   <script name="importBar" type="module">
     import {LitElement, html, css} from "https://esm.sh/lit";
@@ -110,10 +123,10 @@
               }}).then(() => {
                 caches.open('xxv.network').then(cache => {
                   cache.add(`/module?data=${data}`);
+                  localStorage.setItem(mod, data);
+                  input.value = "";
+                  location.reload();
                 })
-                localStorage.setItem(mod, data);
-                input.value = "";
-                location.reload();
               })
           }
         } else {
@@ -126,14 +139,20 @@
         return html`${navigator.onLine ?
           html`
             <form @submit="${(e) => this.handleSubmit(e)}">
-              <input type="text" placeholder="module" name="modules" list="commonmods" />
+              <input type="text" placeholder="module — press / to focus" name="modules" list="commonmods" />
               <datalist id="commonmods">
                 <option value="base">
                 <option value="about">
               </datalist>
             </form>
             <br/>
-          `: null}`;
+          `: html`<form @submit="${(e) => this.handleSubmit(e)}">
+            <input type="text" placeholder="offline." name="modules" list="commonmods" disabled />
+            <datalist id="commonmods">
+              <option value="base">
+              <option value="about">
+            </datalist>
+          </form>`}`;
       }
     }
     customElements.get("import-bar") || customElements.define("import-bar", importBar);
@@ -225,9 +244,10 @@
         for(let i = 0; i < window.localStorage.length; i++){
           modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span><span class="separator"> — </span><span class="delete" @click=${() => { this.deleteApp(Object.keys(window.localStorage)[i])}}>delete</span></div>`);
         }
+        console.log(modulesList);
         return html`
           <div class="modules">
-            ${modulesList}
+            ${modulesList.length !== 0 ? html`${modulesList}` : html`<span class="module-description">no modules yet!<span>`}
           </div>
         `;
       }
@@ -237,9 +257,9 @@
 
   <main id="app">
     <div class="import-title">Import</div>
-    <import-bar class="import-bar"></import-bar>
+    <import-bar class="import-bar" id="import-bar"></import-bar>
     <div class="modules-title">Modules</div>
-    <modules-box class="modules-box"></modules-box>
+    <modules-box class="modules-box" id="modules-box"></modules-box>
     <!--<button onClick="unregisterSW()">unregister</button>-->
     <script>
       function unregisterSW(){
