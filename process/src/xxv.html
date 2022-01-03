@@ -244,7 +244,6 @@
         for(let i = 0; i < window.localStorage.length; i++){
           modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span><span class="separator"> — </span><span class="delete" @click=${() => { this.deleteApp(Object.keys(window.localStorage)[i])}}>delete</span></div>`);
         }
-        console.log(modulesList);
         return html`
           <div class="modules">
             ${modulesList.length !== 0 ? html`${modulesList}` : html`<span class="module-description">no modules yet!<span>`}
