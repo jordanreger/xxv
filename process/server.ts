@@ -10,7 +10,7 @@ async function handler(req: Request): Promise<any> {
 
   switch(path){
     case '/':
-      tr = true, rb = await file("./process/src/index.html"), ct = "text/html; charset=UTF-8";
+      tr = true, rb = await file("./process/src/xxv.html"), ct = "text/html; charset=UTF-8";
       break;
 
     case '/robots.txt':
