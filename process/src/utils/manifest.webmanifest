@@ -10,7 +10,7 @@
   "icons": [
     {
       "src": "/xxvlogo.png",
-      "sizes": "500x500",
+      "sizes": "400x400",
       "type": "image/png"
     }
   ]
