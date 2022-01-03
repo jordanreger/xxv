@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
+    />
+
+    <!-- for a better SEO score; lighthouse please love me back -->
+
+    <title>xxv</title>
+    <meta name="title" content="xxv">
+    <meta name="description" content="a lightweight offline web app launcher">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xxv.network/">
+    <meta property="og:title" content="xxv">
+    <meta property="og:description" content="a lightweight offline web app launcher">
+    <meta property="og:image" content="https://github.com/jordanreger/media/blob/main/cover.png?raw=true">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xxv.network/">
+    <meta property="twitter:title" content="xxv">
+    <meta property="twitter:description" content="a lightweight offline web app launcher">
+    <meta property="twitter:image" content="https://github.com/jordanreger/media/blob/main/cover.png?raw=true">
+
+    <!-- hopefully that worked -->
+
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33134197?s=96&v=4" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" />
+    </noscript>
+
+    <style>
+      @media screen and (max-width: 600px) {
+        :root {
+          --size-title: 10vmin;
+          --size-text: 7.5vmin;
+          --size-subtext: 4.5vmin;
+        }
+
+        button {
+          padding-top: 2vmin;
+          padding-bottom: 2vmin;
+          padding-left: 4vmin;
+          padding-right: 4vmin;
+          font-size: var(--size-subtext);
+        }
+      }
+
+      @media screen and (min-width: 600px) {
+        :root {
+          --size-title: 6vmin;
+          --size-text: 4vmin;
+          --size-subtext: 2vmin;
+        }
+
+        button {
+          padding-top: 1vmin;
+          padding-bottom: 1vmin;
+          padding-left: 2vmin;
+          padding-right: 2vmin;
+          font-size: var(--size-subtext);
+        }
+      }
+
+      :root {
+        --font-title: DM Sans;
+        --font-text: Inter;
+        --font-subtext: DM Mono;
+
+
+        --color-primary-text: #f0f0f0;
+        --color-secondary-text: #c4c4c4;
+        --color-tertiary-text: #696969;
+
+        --color-primary-bg: #212121;
+        --color-secondary-bg: #424242;
+        --color-tertiary-bg: #ffcf96;
+
+        --color-shadow-low: rgba(49, 49, 49, 0.5);
+
+        --weight-heavy: bold;
+        --weight-regular: normal;
+      }
+
+      ::-moz-selection {
+        color: var(--color-primary-bg);
+        background: var(--color-tertiary-bg);
+      }
+
+      ::selection {
+        color: var(--color-primary-bg);
+        background: var(--color-tertiary-bg);
+      }
+
+      html {
+        background: #000;
+      }
+
+      #airframe {
+        position: absolute;
+        padding-bottom: 5vmin;
+        left: 5vmin;
+        top: 5vmin;
+        width: calc(100% - 10vmin);
+        height: fit-content;
+      }
+
+      div {
+        width: fit-content;
+      }
+
+      .subtitle {
+        font-family: var(--font-title);
+        font-size: var(--size-text);
+        font-weight: var(--weight-heavy);
+        color: var(--color-primary-text);
+      }
+
+      .body {
+        font-family: var(--font-text);
+        font-size: var(--size-subtext);
+        color: var(--color-secondary-text);
+      }
+
+      .outbound {
+        text-decoration: underline;
+        color: var(--color-primary-text);
+      }
+
+      .accent {
+        color: var(--color-tertiary-bg);
+        font-weight: var(--weight-heavy);
+        font-size: var(--size-subtext);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--color-tertiary-bg);
+        cursor: pointer;
+      }
+
+      code {
+        background-color: var(--color-secondary-bg);
+        font-size: calc(var(--size-subtext) - 0.25vmin);
+        border-radius: 5px;
+        padding: 0.25vmin;
+        font-family: var(--font-subtext);
+      }
+
+      button {
+        background-color: var(--color-secondary-bg);
+        border: 2px solid var(--color-tertiary-text);
+        border-radius: 10px;
+        outline: none;
+        font-family: var(--font-text);
+        color: var(--color-primary-text);
+        box-shadow: 3px 3px var(--color-shadow-low);
+        font-weight: var(--weight-heavy);
+        user-select: none;
+
+      }
+
+      button:hover {
+        color: var(--color-primary-bg);
+        background-color: var(--color-tertiary-bg);
+        border: 2px solid var(--color-tertiary-bg);
+        cursor: pointer;
+      }
+
+      button:active {
+        transform: translate(0.2vmin, 0.2vmin);
+        box-shadow: 0px 0px var(--color-shadow-low);
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="airframe">
+      <div class="subtitle" id="readme"><a href="#readme">readme</a></div>
+      <br/>
+      <div class="body">
+        xxv is a lightweight, offline, web app launcher.
+        <br/>
+        <br/>
+        download it now:
+        <br/>
+        [<a href="https://process.xxv.network" class="outbound">web</a>] ~ download as a progressive web app
+      </div>
+      <br/>
+      <br/>
+      <div class="subtitle" id="modules"><a href="#modules">modules</a></div>
+      <br/>
+      <div class="body">
+        modules are single html files that make up the xxv network. they are imported by inputting the title of the file (ex. <i>about</i>.html) into the import bar. all modules are hosted in <a href="https://github.com/xxvnetwork/modules" class="outbound">this repository</a>. to add your own app to the collection, <a href="https://github.com/xxvnetwork/modules/pulls" class="outbound">create a pull request!</a>
+        <br/>
+        <br/>
+        here are some test modules to demonstrate the capabilities of xxv:
+        <br/>
+        <br/>
+        [<a href="https://github.com/xxvnetwork/modules/blob/main/about.html" class="outbound">about</a>] ~ displays the about page.
+        <br/>
+        [<a href="https://github.com/xxvnetwork/modules/blob/main/fx.html" class="outbound">fx</a>] ~ a mockup editor (work in progress)
+      </div>
+      <br/>
+      <br/>
+      <div class="subtitle" id="dev"><a href="#dev">dev</a></div>
+      <br/>
+      <div class="body">
+        xxv was built by <a href="https://jordanreger.com" class="outbound">jordan reger</a> using <a href="https://deno.land" class="outbound">deno</a>, plain html and css, and a lot of coffee. the idea came when a certain mockup editor wouldn't work offline... and because <a href="https://indieweb.social/web/@jr/107553564066314363" class="outbound">the future is light</a>. read the <a href="https://jordanreger.com/xxv" class="outbound">devlog</a>.
+      </div>
+    </div>
+  </body>
+</html>

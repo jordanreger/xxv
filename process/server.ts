@@ -11,7 +11,7 @@ async function handler(req: Request): Promise<any> {
     // PAGES
     case '/':
       f = true, r = "";
-      file = Deno.readFile("./src/xxv.html");
+      file = Deno.readFile("./process/src/xxv.html");
       ct = "text/html; charset=UTF-8";
       break;
 
@@ -22,22 +22,22 @@ async function handler(req: Request): Promise<any> {
       break;
     case '/manifest.webmanifest':
       f = true, r = "";
-      file = Deno.readFile("./src/utils/manifest.webmanifest");
+      file = Deno.readFile("./process/src/utils/manifest.webmanifest");
       ct = "application/manifest+json";
       break;
     case '/service-worker.js':
       f = true, r = "";
-      file = Deno.readFile("./src/utils/serviceWorker.js");
+      file = Deno.readFile("./process/src/utils/serviceWorker.js");
       ct = "text/javascript";
       break;
     case '/main.css':
       f = true, r = "";
-      file = Deno.readFile("./src/utils/main.css");
+      file = Deno.readFile("./process/src/utils/main.css");
       ct = "text/css";
       break;
     case '/xxvlogo.png':
       f = true, r = "";
-      file = Deno.readFile("./src/utils/xxvlogo.png");
+      file = Deno.readFile("./process/src/utils/xxvlogo.png");
       ct = "image/png";
       break;
 
@@ -51,7 +51,7 @@ async function handler(req: Request): Promise<any> {
 
     default:
       f = true, r = "";
-      file = Deno.readFile("./src/utils/404.html");
+      file = Deno.readFile("./process/src/utils/404.html");
       ct = "text/html; charset=UTF-8";
   }
 
