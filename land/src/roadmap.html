@@ -8,20 +8,20 @@
 
     <!-- for a better SEO score; lighthouse please love me back -->
 
-    <title>xxv</title>
-    <meta name="title" content="xxv">
-    <meta name="description" content="a lightweight offline web app launcher">
+    <title>~/roadmap</title>
+    <meta name="title" content="xxv ~/roadmap">
+    <meta name="description" content="xxv development roadmap">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xxv.network/">
-    <meta property="og:title" content="xxv">
-    <meta property="og:description" content="a lightweight offline web app launcher">
+    <meta property="og:url" content="https://xxv.network/roadmap">
+    <meta property="og:title" content="xxv ~/roadmap">
+    <meta property="og:description" content="xxv development roadmap">
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/96634922?s=400&u=a9197ca079d5d778083dcf125a4bad0a007b8f54&v=4">
 
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://xxv.network/">
-    <meta property="twitter:title" content="xxv">
-    <meta property="twitter:description" content="a lightweight offline web app launcher">
+    <meta property="twitter:url" content="https://xxv.network/roadmap">
+    <meta property="twitter:title" content="xxv ~/roadmap">
+    <meta property="twitter:description" content="xxv development roadmap">
     <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/96634922?s=400&u=a9197ca079d5d778083dcf125a4bad0a007b8f54&v=4">
 
     <!-- hopefully that worked -->
@@ -177,37 +177,24 @@
   </head>
   <body>
     <div id="airframe">
-      <div class="subtitle" id="readme"><a href="#readme">readme</a></div>
+      <div class="subtitle" id="roadmap"><a href="/">←</a> <a href="/roadmap">roadmap</a></div>
       <br/>
       <div class="body">
-        xxv is a lightweight, offline, web app launcher.
-        <br/>
-        <br/>
-        download it now:
-        <br/>
-        [<a href="https://process.xxv.network" class="outbound">web</a>] ~ download as a progressive web app
+        below is a generalized roadmap of the xxv network. most of this is probably optimistic but could result in legitimate features.
       </div>
       <br/>
       <br/>
-      <div class="subtitle" id="modules"><a href="#modules">modules</a></div>
+      <div class="subtitle" id="module-exchange">[x] <a href="#module-exchange">module exchange</a></div>
       <br/>
       <div class="body">
-        modules are single html files that make up the xxv network. they are imported by inputting the title of the file (ex. <i>about</i>.html) into the import bar. all modules are hosted in <a href="/modules" class="outbound">this repository</a>. to add your own app to the collection, <a href="https://github.com/xxvnetwork/modules/pulls" class="outbound">create a pull request!</a>
-        <br/>
-        <br/>
-        here are some test modules to demonstrate the capabilities of xxv:
-        <br/>
-        <br/>
-        [<a href="https://github.com/xxvnetwork/modules/blob/main/about.html" class="outbound">about</a>] ~ displays the about page.
-        <br/>
-        [<a href="https://github.com/xxvnetwork/modules/blob/main/fx.html" class="outbound">fx</a>] ~ a mockup editor (work in progress)
+        as mentioned, <a href="/#modules" class="outbound">modules</a> are the lifeblood of the network. they are single html files that make up the apps xxv deploys. as of writing this (1.4.21), the module exchange is only a github repo that requires a pull request to add the file to. the hope for the future is to have a system similar to <a href="https://deno.land/x" class="outbound">deno.land/x</a>.
       </div>
       <br/>
       <br/>
-      <div class="subtitle" id="dev"><a href="#dev">dev</a></div>
+      <div class="subtitle" id="auto-update">[x] <a href="#auto-update">auto update</a></div>
       <br/>
       <div class="body">
-        xxv was built by <a href="https://jordanreger.com" class="outbound">jordan reger</a> using <a href="https://deno.land" class="outbound">deno</a>, plain html and css, and a lot of coffee. the idea came when a certain mockup editor wouldn't work offline... and because <a href="https://indieweb.social/web/@jr/107553564066314363" class="outbound">the future is light</a>. read the <a href="https://jordanreger.com/xxv" class="outbound">devlog</a> or <a href="/roadmap" class="outbound">view the roadmap</a>.
+        pwas are not very... update friendly (for a reason, and it's a good reason - they're meant to stay static!). however, an automatic update that is triggered on your first instance of internet connection (while using the app, of course) would be extremely useful to keeping software up-to-date.
       </div>
     </div>
   </body>

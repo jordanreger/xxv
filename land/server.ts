@@ -12,6 +12,13 @@ async function handler(req: Request): Promise<any> {
     case '/':
       tr = true, rb = await file("./land/src/index.html"), ct = "text/html; charset=UTF-8";
       break;
+    case '/roadmap':
+      tr = true, rb = await file("./land/src/roadmap.html"), ct = "text/html; charset=UTF-8";
+      break;
+
+    case '/modules':
+      tr = false, rb = "https://github.com/xxvnetwork/modules";
+      break;
 
     default:
       tr = true, rb = "404", ct = "text/html; charset=UTF-8";
