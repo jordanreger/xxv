@@ -18,127 +18,125 @@ async function handler(req: Request): Promise<any> {
 
     case route('/mod/.'):
       let mod = path.replace("/mod/", "");
-      let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`)
-        .then((data) => data.json())
-        .then((data) => { return data })
-      let request = params.get("request");
-      if(!request){
-        rb = `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
-            />
-            <meta
-              name="theme-color"
-              content="#000"
-            />
-
-            <title>xxv</title>
-
-            <style>
-              html {
-                background-color: #000;
-              }
-
-              ::-moz-selection {
-                color: #000;
-                background: #ffcf96;
-              }
-
-              ::selection {
-                color: #000;
-                background: #ffcf96;
-              }
-
-              a {
-                color: inherit;
-                text-decoration: none;
-              }
-
-              a:hover {
-                color: #ffcf96;
-                cursor: pointer;
-              }
-
-              #app {
-                background-color: #000;
-                position: absolute;
-                height: auto;
-                left: 5vmin;
-                top: 5vmin;
-                right: 5vmin;
-                bottom: 5vmin;
-              }
-
-              .arrow {
-                display: inline-block;
-                font-family: Courier;
-                font-size: 4vmin;
-                -moz-transform: scale(-1, 1);
-                -webkit-transform: scale(-1, 1);
-                transform: scale(-1, 1);
-                user-select: none;
-                color: #696969;
-              }
-
-              .module-name {
-                font-family: Arial;
-                font-weight: bold;
-                font-size: 5vmin;
-                user-select: none;
-                color: #c4c4c4;
-              }
-
-              .module-name:hover {
-                color: #ffcf96;
-                cursor: pointer;
-              }
-
-              .module-description {
-                font-family: Arial;
-                font-size: 5vmin;
-                user-select: none;
-                color: #c4c4c4;
-              }
-
-              .separator {
-                font-family: Arial;
-                font-weight: bold;
-                font-size: 4vmin;
-                user-select: none;
-                color: #212121;
-              }
-
-              pre {
-                color: #c4c4c4;
-              }
-            </style>
-
-          </head>
-
-          <main id="app">
-            <div class="module"><span class="arrow">↵</span> <span class="module-name"><a href="https://github.com/xxvnetwork/modules/blob/main/${data.name}.json">${data.name}</a></span><span class="separator"> — </span><span class="module-description">${data.description}</span></div>
-            <br/>
-            <br/>
-            <span class="module-description">cache urls</span>
-            <pre style="word-wrap: break-word; white-space: pre-wrap;">${data.cache}</pre>
-          </main>
-        </html>
-        `;
-      } else {
-        data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`)
+      try {
+        let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`)
           .then((data) => data.json())
           .then((data) => { return data })
-        let html = await fetch(data.src, {mode: 'cors'})
-          .then((data) => data.text())
-          .then((data) => { return data })
-        rb = html;
+        let request = params.get("request");
+        if(!request){
+          tr = true, rb = `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
+              />
+              <meta
+                name="theme-color"
+                content="#000"
+              />
+
+              <title>xxv</title>
+
+              <style>
+                html {
+                  background-color: #000;
+                }
+
+                ::-moz-selection {
+                  color: #000;
+                  background: #ffcf96;
+                }
+
+                ::selection {
+                  color: #000;
+                  background: #ffcf96;
+                }
+
+                a {
+                  color: inherit;
+                  text-decoration: none;
+                }
+
+                a:hover {
+                  color: #ffcf96;
+                  cursor: pointer;
+                }
+
+                #app {
+                  background-color: #000;
+                  position: absolute;
+                  height: auto;
+                  left: 5vmin;
+                  top: 5vmin;
+                  right: 5vmin;
+                  bottom: 5vmin;
+                }
+
+                .arrow {
+                  display: inline-block;
+                  font-family: Courier;
+                  font-size: 4vmin;
+                  -moz-transform: scale(-1, 1);
+                  -webkit-transform: scale(-1, 1);
+                  transform: scale(-1, 1);
+                  user-select: none;
+                  color: #696969;
+                }
+
+                .module-name {
+                  font-family: Arial;
+                  font-weight: bold;
+                  font-size: 5vmin;
+                  user-select: none;
+                  color: #c4c4c4;
+                }
+
+                .module-name:hover {
+                  color: #ffcf96;
+                  cursor: pointer;
+                }
+
+                .module-description {
+                  font-family: Arial;
+                  font-size: 5vmin;
+                  user-select: none;
+                  color: #c4c4c4;
+                }
+
+                .separator {
+                  font-family: Arial;
+                  font-weight: bold;
+                  font-size: 4vmin;
+                  user-select: none;
+                  color: #212121;
+                }
+
+                pre {
+                  color: #c4c4c4;
+                }
+              </style>
+
+            </head>
+
+            <main id="app">
+              <div class="module"><span class="arrow">↵</span> <span class="module-name"><a href="https://github.com/xxvnetwork/modules/blob/main/${data.name}.json">${data.name}</a></span><span class="separator"> — </span><span class="module-description">${data.description}</span></div>
+              <br/>
+              <br/>
+              <span class="module-description">cache urls</span>
+              <pre style="word-wrap: break-word; white-space: pre-wrap;">${data.cache}</pre>
+            </main>
+          </html>
+          `, ct = "text/html; charset=UTF-8";
+        } else {
+          tr = false, rb = `https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`
+        }
+      } catch(error) {
+        tr = false, rb = 'https://github.com/xxvnetwork/modules';
       }
-      tr = true, ct = "text/html; charset=UTF-8";
+
       break;
 
     case '/modules':

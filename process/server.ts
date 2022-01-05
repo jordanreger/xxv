@@ -22,9 +22,6 @@ async function handler(req: Request): Promise<any> {
     case '/service-worker.js':
       tr = true, rb = await file("./process/src/utils/serviceWorker.js"), ct = "text/javascript";
       break;
-    case '/main.css':
-      tr = true, rb = await file("./process/src/utils/main.css"), ct = "text/css";
-      break;
     case '/xxvlogo.png':
       tr = false, rb = "https://avatars.githubusercontent.com/u/96634922?s=400&u=a9197ca079d5d778083dcf125a4bad0a007b8f54&v=4";
       break;
