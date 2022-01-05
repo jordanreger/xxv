@@ -22,9 +22,6 @@ async function handler(req: Request): Promise<any> {
     case '/service-worker.js':
       tr = true, rb = await file("./process/src/utils/serviceWorker.js"), ct = "text/javascript";
       break;
-    case '/mithril.js':
-      tr = true, rb = await file("./process/src/utils/mithril.js"), ct = "text/javascript";
-      break;
     case '/main.css':
       tr = true, rb = await file("./process/src/utils/main.css"), ct = "text/css";
       break;

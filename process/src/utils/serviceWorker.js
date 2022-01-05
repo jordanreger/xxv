@@ -1,9 +1,6 @@
 const page = "xxv.network"
 const assets = [
-  "/",
-  "/module",
-  "/main.css",
-  "/mithril.js"
+  "/"
 ]
 
 self.addEventListener("install", installEvent => {
