@@ -30,16 +30,6 @@
 
     <!-- PWA -->
 
-    <link rel="apple-touch-icon" sizes="500x500" href="/xxvlogo.png" />
-    <link rel="shortcut icon" href="/xxvlogo.png" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Space+Grotesk:wght@300;400;500&display=swap" />
-    </noscript>
-
     <style>
       html {
         background-color: #000;
@@ -93,6 +83,7 @@
         }
 
         input {
+          font-family: Arial;
           border: none;
           outline: 2px solid #c4c4c4;
           background-color: transparent;
@@ -101,7 +92,6 @@
           height: 100%;
           border-radius: 10px;
           color: #c4c4c4;
-          font-family: IBM Plex Mono;
           box-sizing: border-box;
           padding-left: 3vmin;
           font-size: 4vmin;
@@ -147,7 +137,7 @@
             </form>
             <br/>
           `: html`<form @submit="${(e) => this.handleSubmit(e)}">
-            <input type="text" placeholder="offline." name="modules" list="commonmods" disabled />
+            <input type="text" placeholder="offline" name="modules" list="commonmods" disabled />
             <datalist id="commonmods">
               <option value="base">
               <option value="about">
@@ -174,7 +164,7 @@
 
         .arrow {
           display: inline-block;
-          font-family: IBM Plex Mono;
+          font-family: Courier;
           font-size: 4vmin;
           -moz-transform: scale(-1, 1);
           -webkit-transform: scale(-1, 1);
@@ -184,11 +174,11 @@
         }
 
         .module-name {
-          font-family: IBM Plex Mono;
+          font-family: Arial;
           font-weight: bold;
           font-size: 5vmin;
           user-select: none;
-          color: #e0e0e0;
+          color: #c4c4c4;
         }
 
         .module-name:hover {
@@ -197,28 +187,29 @@
         }
 
         .module-description {
-          font-family: IBM Plex Mono;
+          font-family: Arial;
           font-size: 4vmin;
           user-select: none;
           color: #c4c4c4;
         }
 
         .separator {
-          font-family: IBM Plex Mono;
+          font-family: Arial;
+          font-weight: bold;
           font-size: 4vmin;
           user-select: none;
-          color: #424242;
+          color: #212121;
         }
 
         .delete {
-          font-family: IBM Plex Mono;
+          font-family: Arial;
           font-size: 4.5vmin;
           user-select: none;
           color: #212121;
         }
 
         .delete:hover {
-          font-family: IBM Plex Mono;
+          font-family: Arial;
           font-size: 4.5vmin;
           user-select: none;
           cursor: pointer;
