@@ -133,7 +133,7 @@ async function handler(req: Request): Promise<any> {
         data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`)
           .then((data) => data.json())
           .then((data) => { return data })
-        let html = await fetch(data.src)
+        let html = await fetch(data.src, {mode: 'cors'})
           .then((data) => data.text())
           .then((data) => { return data })
         rb = html;
