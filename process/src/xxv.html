@@ -197,26 +197,27 @@
         e.preventDefault();
         let input = this.shadowRoot.children[0].children[0], mod = input.value;
         if(mod) {
-          let data = await fetch(`https://xxv.network/mod/${mod}?request=true`)
-            .then((data) => data.arrayBuffer())
-            .then((data) => { return data })
-            .catch(() => {
-              input.value = "";
-              console.log("module doesn't exist.");
-            })
-          data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
-          if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-              for(let registration of registrations) {
-                registration.unregister()
-              }}).then(() => {
-                caches.open('xxv.network').then(cache => {
-                  cache.add(`/module?data=${data}`);
-                  localStorage.setItem(mod, data);
-                  input.value = "";
-                  location.reload();
+          try {
+            let data = await fetch(`https://xxv.network/mod/${mod}?request=true`)
+              .then((data) => data.arrayBuffer())
+              .then((data) => { return data })
+            data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
+            if ("serviceWorker" in navigator) {
+              navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                  registration.unregister()
+                }}).then(() => {
+                  caches.open('xxv.network').then(cache => {
+                    cache.add(`/module?data=${data}`);
+                    localStorage.setItem(mod, data);
+                    input.value = "";
+                    location.reload();
+                  })
                 })
-              })
+            }
+          } catch(error){
+            input.value = "";
+            console.log(error);
           }
         } else {
           console.log("please input a valid module name");
