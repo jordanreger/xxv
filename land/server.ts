@@ -23,7 +23,7 @@ async function handler(req: Request): Promise<any> {
           .then((data) => data.json())
           .then((data) => { return data })
         let request = params.get("request");
-        if(!request){
+        if(request === null){
           tr = true, rb = `
           <!DOCTYPE html>
           <html lang="en">
@@ -130,11 +130,13 @@ async function handler(req: Request): Promise<any> {
             </main>
           </html>
           `, ct = "text/html; charset=UTF-8";
-        } else {
+        } else if(request === "html"){
           let src = await fetch(data.src)
             .then((data) => data.text())
             .then((data) => { return data })
           tr = true, rb = src, ct = "text/html; charset=UTF-8";
+        } else if(request === "cache"){
+          tr = true, rb = data.cache, ct = "text/html; charset=UTF-8";
         }
       } catch(error) {
         tr = false, rb = 'https://github.com/xxvnetwork/modules';

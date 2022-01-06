@@ -198,8 +198,11 @@
         let input = this.shadowRoot.children[0].children[0], mod = input.value;
         if(mod) {
           try {
-            let data = await fetch(`https://xxv.network/mod/${mod}?request=true`)
+            let data = await fetch(`https://xxv.network/mod/${mod}?request=html`)
               .then((data) => data.arrayBuffer())
+              .then((data) => { return data })
+            let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
+              .then((data) => data.text())
               .then((data) => { return data })
             data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
             if ("serviceWorker" in navigator) {
@@ -207,11 +210,12 @@
                 for(let registration of registrations) {
                   registration.unregister()
                 }}).then(() => {
+                  console.log(appCache);
                   caches.open('xxv.network').then(cache => {
                     cache.add(`/module?data=${data}`);
                     localStorage.setItem(mod, data);
                     input.value = "";
-                    location.reload();
+                    //location.reload();
                   })
                 })
             }
