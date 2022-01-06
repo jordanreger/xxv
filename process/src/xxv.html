@@ -202,7 +202,7 @@
               .then((data) => data.arrayBuffer())
               .then((data) => { return data })
             let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
-              .then((data) => data.text())
+              .then((data) => data.json())
               .then((data) => { return data })
             data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
             if ("serviceWorker" in navigator) {
@@ -210,13 +210,14 @@
                 for(let registration of registrations) {
                   registration.unregister()
                 }}).then(() => {
-                  appCache = appCache.split(',');
-                  console.log(appCache);
                   caches.open('xxv.network').then(cache => {
                     cache.add(`/module?data=${data}`);
+                    for(let i = 0; i < appCache.length; i++){
+                      cache.add(appCache[i]);
+                    }
                     localStorage.setItem(mod, data);
                     input.value = "";
-                    //location.reload();
+                    location.reload();
                   })
                 })
             }
@@ -326,8 +327,14 @@
         window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
       }
 
-      deleteApp(mod){
+      async deleteApp(mod){
+        let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
+          .then((data) => data.json())
+          .then((data) => { return data })
         caches.open('xxv.network').then(cache => {
+          for(let i = 0; i < appCache.length; i++){
+            cache.delete(appCache[i]);
+          }
           cache.delete(`/module?data=${localStorage.getItem(mod)}`).then(function(response){
             localStorage.removeItem(mod);
             location.reload();
