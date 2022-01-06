@@ -6,7 +6,7 @@ async function handler(req: Request): Promise<any> {
   const route = (route:string) => { let regexRoute = new RegExp(route, "gmi"); if(regexRoute.test(path)){ return path } else { return null }}
   const file = async (fp:string) => { let d = new TextDecoder("utf-8"); return d.decode(await Deno.readFile(fp))}
 
-  let tr, rb, ct = "";
+  let tr, rb = "", ct = "";
 
   switch(path){
     case '/':
@@ -23,9 +23,9 @@ async function handler(req: Request): Promise<any> {
           .then((data) => data.json())
           .then((data) => { return data })
         let request = params.get("request");
+        tr = true;
         if(request === null){
-          tr = true, rb = `
-          <!DOCTYPE html>
+          rb = `<!DOCTYPE html>
           <html lang="en">
             <head>
 
@@ -134,14 +134,15 @@ async function handler(req: Request): Promise<any> {
           let src = await fetch(data.src)
             .then((data) => data.text())
             .then((data) => { return data })
-          tr = true, rb = src, ct = "text/html; charset=UTF-8";
+          rb = src, ct = "text/html; charset=UTF-8";
         } else if(request === "cache"){
-          tr = true, rb = data.cache, ct = "text/html; charset=UTF-8";
+          rb = JSON.stringify(data.cache), ct = "application/json";
+        } else {
+          rb = "404", ct = "text/html; charset=UTF-8";
         }
       } catch(error) {
-        tr = false, rb = 'https://github.com/xxvnetwork/modules';
+        tr = false, rb = "https://github.com/xxvnetwork/modules";
       }
-
       break;
 
     case '/modules':

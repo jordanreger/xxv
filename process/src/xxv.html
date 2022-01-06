@@ -210,6 +210,7 @@
                 for(let registration of registrations) {
                   registration.unregister()
                 }}).then(() => {
+                  appCache = appCache.split(',');
                   console.log(appCache);
                   caches.open('xxv.network').then(cache => {
                     cache.add(`/module?data=${data}`);
