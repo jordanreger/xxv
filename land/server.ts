@@ -153,7 +153,7 @@ async function handler(req: Request): Promise<any> {
   let res;
 
   if(tr){
-    res = new Response(await rb, { headers: { "content-type": ct } });
+    res = new Response(await rb, { headers: { "content-type": ct, "Access-Control-Allow-Origin": "*" } });
   } else {
     res = Response.redirect(rb, 302);
   }
