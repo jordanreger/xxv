@@ -131,7 +131,10 @@ async function handler(req: Request): Promise<any> {
           </html>
           `, ct = "text/html; charset=UTF-8";
         } else {
-          tr = false, rb = `https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`
+          let src = await fetch(data.src)
+            .then((data) => data.text())
+            .then((data) => { return data })
+          tr = true, rb = src, ct = "text/html; charset=UTF-8";
         }
       } catch(error) {
         tr = false, rb = 'https://github.com/xxvnetwork/modules';
