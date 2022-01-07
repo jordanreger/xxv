@@ -121,7 +121,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: red;
+        background-color: transparent;
         outline: none;
         border: 2px solid #c4c4c4;
         border-radius: 10px;
@@ -162,6 +162,12 @@
             location.reload();
           })
         }
+      } else if (!currentVersion){
+        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/releases")
+          .then((data) => data.json())
+          .then((data) => { return data })
+        let latestVersion = latest[0].tag_name;
+        localStorage.setItem("version", latestVersion);
       }
     }
 
