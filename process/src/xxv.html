@@ -138,38 +138,52 @@
   </head>
   <script name="setup">
 
+    // this is here because lit elements and esm.sh won't shut up
+    console.warn = () => {};
+    //
+
     function hfs(size) {
       var i = Math.floor( Math.log(size) / Math.log(1024) );
       return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ['b', 'kb', 'mb'][i];
     };
+
+    if(!navigator.onLine){
+      console.log("xxv.connection: offline");
+    } else {
+      console.log("xxv.connection: online");
+    }
+
     if ('storage' in navigator && 'estimate' in navigator.storage) {
       navigator.storage.estimate().then(estimate => {
-        console.log(`app size: ${hfs(estimate.usage)}`);
+        console.log(`xxv.appSize: ${hfs(estimate.usage)}`);
       });
     }
 
+    console.log(`xxv.latestCommit: ${localStorage.getItem("commit")}`);
+
     async function getLatest(){
-      let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commits")
-        .then((data) => data.json())
-        .then((data) => { return data })
-      let latestCommit = latest[0].sha, currentCommit = localStorage.getItem("commit");
-      if(currentCommit !== latestCommit){
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for(let registration of registrations) {
-              registration.unregister()
-          }}).then(() => {
-            console.log("getting latest commit");
-            localStorage.setItem("commit", latestCommit);
-            location.reload();
-          })
-        }
-      } else if (!currentCommit){
-        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
+      if(navigator.onLine){
+        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commits")
           .then((data) => data.json())
           .then((data) => { return data })
-        let latestCommit = latest[0].sha;
-        localStorage.setItem("commit", latestCommit);
+        let latestCommit = latest[0].sha, currentCommit = localStorage.getItem("commit");
+        if(currentCommit !== latestCommit){
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+              for(let registration of registrations) {
+                registration.unregister()
+            }}).then(() => {
+              localStorage.setItem("commit", latestCommit);
+              location.reload();
+            })
+          }
+        } else if (!currentCommit){
+          let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
+            .then((data) => data.json())
+            .then((data) => { return data })
+          let latestCommit = latest[0].sha;
+          localStorage.setItem("commit", latestCommit);
+        }
       }
     }
 
@@ -188,200 +202,209 @@
     });
   </script>
   <script name="importBar" type="module">
-    import {LitElement, html, css} from "https://esm.sh/lit";
+    let LitElement, html, css;
+    if(navigator.onLine){
+      import("https://esm.sh/lit").then(ex => {
+        LitElement = ex.LitElement, html = ex.html, css = ex.css;
 
-    class importBar extends LitElement {
-      static styles = css`
-        ::-moz-selection {
-          color: #000;
-          background: #ffcf96;
-        }
-
-        ::selection {
-          color: #000;
-          background: #ffcf96;
-        }
-
-        input {
-          font-family: Arial;
-          border: none;
-          outline: 2px solid #c4c4c4;
-          background-color: transparent;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 10px;
-          color: #c4c4c4;
-          box-sizing: border-box;
-          padding-left: 3vmin;
-          font-size: 4vmin;
-        }
-      `;
-
-      async handleSubmit(e){
-        e.preventDefault();
-        let input = this.shadowRoot.children[0].children[0], mod = input.value;
-        if(mod) {
-          try {
-            let data = await fetch(`https://xxv.network/mod/${mod}?request=html`)
-              .then((data) => data.arrayBuffer())
-              .then((data) => { return data })
-            let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
-              .then((data) => data.json())
-              .then((data) => { return data })
-            data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
-            if ("serviceWorker" in navigator) {
-              navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                  registration.unregister()
-                }}).then(() => {
-                  caches.open('xxv.network').then(cache => {
-                    cache.add(`/module?data=${data}`);
-                    for(let i = 0; i < appCache.length; i++){
-                      cache.add(appCache[i]);
-                    }
-                    localStorage.setItem(mod, data);
-                    input.value = "";
-                    location.reload();
-                  })
-                })
+        class importBar extends LitElement {
+          static styles = css`
+            ::-moz-selection {
+              color: #000;
+              background: #ffcf96;
             }
-          } catch(error){
-            input.value = "";
-            console.log(error);
+
+            ::selection {
+              color: #000;
+              background: #ffcf96;
+            }
+
+            input {
+              font-family: Arial;
+              border: none;
+              outline: 2px solid #c4c4c4;
+              background-color: transparent;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              border-radius: 10px;
+              color: #c4c4c4;
+              box-sizing: border-box;
+              padding-left: 3vmin;
+              font-size: 4vmin;
+            }
+          `;
+
+          async handleSubmit(e){
+            e.preventDefault();
+            let input = this.shadowRoot.children[0].children[0], mod = input.value;
+            if(mod) {
+              try {
+                let data = await fetch(`https://xxv.network/mod/${mod}?request=html`)
+                  .then((data) => data.arrayBuffer())
+                  .then((data) => { return data })
+                let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
+                  .then((data) => data.json())
+                  .then((data) => { return data })
+                data = encodeURIComponent(btoa(String.fromCharCode(...new Uint8Array(data))));
+                if ("serviceWorker" in navigator) {
+                  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                      registration.unregister()
+                    }}).then(() => {
+                      caches.open('xxv.network').then(cache => {
+                        cache.add(`/module?data=${data}`);
+                        for(let i = 0; i < appCache.length; i++){
+                          cache.add(appCache[i]);
+                        }
+                        localStorage.setItem(mod, data);
+                        input.value = "";
+                        location.reload();
+                      })
+                    })
+                }
+              } catch(error){
+                input.value = "";
+                console.log(error);
+              }
+            } else {
+              console.log("please input a valid module name");
+            }
+
           }
-        } else {
-          console.log("please input a valid module name");
+
+          render() {
+            return html`${navigator.onLine ?
+              html`
+                <form @submit="${(e) => this.handleSubmit(e)}">
+                  <input type="text" placeholder="module — press / to focus" name="modules" list="commonmods" />
+                  <datalist id="commonmods">
+                    <option value="base">
+                    <option value="about">
+                  </datalist>
+                </form>
+                <br/>
+              `: html`<form @submit="${(e) => this.handleSubmit(e)}">
+                <input type="text" placeholder="offline" name="modules" list="commonmods" disabled />
+                <datalist id="commonmods">
+                  <option value="base">
+                  <option value="about">
+                </datalist>
+              </form>`}`;
+          }
         }
-
-      }
-
-      render() {
-        return html`${navigator.onLine ?
-          html`
-            <form @submit="${(e) => this.handleSubmit(e)}">
-              <input type="text" placeholder="module — press / to focus" name="modules" list="commonmods" />
-              <datalist id="commonmods">
-                <option value="base">
-                <option value="about">
-              </datalist>
-            </form>
-            <br/>
-          `: html`<form @submit="${(e) => this.handleSubmit(e)}">
-            <input type="text" placeholder="offline" name="modules" list="commonmods" disabled />
-            <datalist id="commonmods">
-              <option value="base">
-              <option value="about">
-            </datalist>
-          </form>`}`;
-      }
+        customElements.get("import-bar") || customElements.define("import-bar", importBar);
+      });
     }
-    customElements.get("import-bar") || customElements.define("import-bar", importBar);
   </script>
 
   <script name="moduleBox" type="module">
-    import {LitElement, html, css} from "https://esm.sh/lit";
+    let LitElement, html, css;
+    if(navigator.onLine){
+      import("https://esm.sh/lit").then(ex => {
+        LitElement = ex.LitElement, html = ex.html, css = ex.css;
+        class moduleBox extends LitElement {
+          static styles = css`
+            .modules {
+              padding: 3vmin;
+              user-select: none;
+            }
 
-    class moduleBox extends LitElement {
-      static styles = css`
-        .modules {
-          padding: 3vmin;
-          user-select: none;
-        }
+            ::-webkit-scrollbar {
+                width: 0;
+            }
 
-        ::-webkit-scrollbar {
-            width: 0;
-        }
+            .arrow {
+              display: inline-block;
+              font-family: Courier;
+              font-size: 4vmin;
+              -moz-transform: scale(-1, 1);
+              -webkit-transform: scale(-1, 1);
+              transform: scale(-1, 1);
+              user-select: none;
+              color: #696969;
+            }
 
-        .arrow {
-          display: inline-block;
-          font-family: Courier;
-          font-size: 4vmin;
-          -moz-transform: scale(-1, 1);
-          -webkit-transform: scale(-1, 1);
-          transform: scale(-1, 1);
-          user-select: none;
-          color: #696969;
-        }
+            .module-name {
+              font-family: Arial;
+              font-weight: bold;
+              font-size: 5vmin;
+              user-select: none;
+              color: #c4c4c4;
+            }
 
-        .module-name {
-          font-family: Arial;
-          font-weight: bold;
-          font-size: 5vmin;
-          user-select: none;
-          color: #c4c4c4;
-        }
+            .module-name:hover {
+              color: #ffcf96;
+              cursor: pointer;
+            }
 
-        .module-name:hover {
-          color: #ffcf96;
-          cursor: pointer;
-        }
+            .module-description {
+              font-family: Arial;
+              font-size: 4vmin;
+              user-select: none;
+              color: #c4c4c4;
+            }
 
-        .module-description {
-          font-family: Arial;
-          font-size: 4vmin;
-          user-select: none;
-          color: #c4c4c4;
-        }
+            .separator {
+              font-family: Arial;
+              font-weight: bold;
+              font-size: 4vmin;
+              user-select: none;
+              color: #212121;
+            }
 
-        .separator {
-          font-family: Arial;
-          font-weight: bold;
-          font-size: 4vmin;
-          user-select: none;
-          color: #212121;
-        }
+            .delete {
+              font-family: Arial;
+              font-size: 4.5vmin;
+              user-select: none;
+              color: #212121;
+            }
 
-        .delete {
-          font-family: Arial;
-          font-size: 4.5vmin;
-          user-select: none;
-          color: #212121;
-        }
+            .delete:hover {
+              font-family: Arial;
+              font-size: 4.5vmin;
+              user-select: none;
+              cursor: pointer;
+              color: #424242;
+            }
+          `;
 
-        .delete:hover {
-          font-family: Arial;
-          font-size: 4.5vmin;
-          user-select: none;
-          cursor: pointer;
-          color: #424242;
-        }
-      `;
-
-      spawnApp(mod){
-        window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
-      }
-
-      async deleteApp(mod){
-        let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
-          .then((data) => data.json())
-          .then((data) => { return data })
-        caches.open('xxv.network').then(cache => {
-          for(let i = 0; i < appCache.length; i++){
-            cache.delete(appCache[i]);
+          spawnApp(mod){
+            window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
           }
-          cache.delete(`/module?data=${localStorage.getItem(mod)}`).then(function(response){
-            localStorage.removeItem(mod);
-            location.reload();
-          })
-        });
-      }
 
-      render() {
-        let modulesList = [];
-        for(let i = 0; i < window.localStorage.length; i++){
-          if(Object.keys(window.localStorage)[i] !== "commit"){
-            modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span><span class="separator"> — </span><span class="delete" @click=${() => { this.deleteApp(Object.keys(window.localStorage)[i])}}>delete</span></div>`);
+          async deleteApp(mod){
+            let appCache = await fetch(`https://xxv.network/mod/${mod}?request=cache`)
+              .then((data) => data.json())
+              .then((data) => { return data })
+            caches.open('xxv.network').then(cache => {
+              for(let i = 0; i < appCache.length; i++){
+                cache.delete(appCache[i]);
+              }
+              cache.delete(`/module?data=${localStorage.getItem(mod)}`).then(function(response){
+                localStorage.removeItem(mod);
+                location.reload();
+              })
+            });
+          }
+
+          render() {
+            let modulesList = [];
+            for(let i = 0; i < window.localStorage.length; i++){
+              if(Object.keys(window.localStorage)[i] !== "commit"){
+                modulesList.push(html`<div class="module"><span class="arrow">↵</span> <span class="module-name" @click=${() => { this.spawnApp(Object.keys(window.localStorage)[i])}}>${Object.keys(window.localStorage)[i]}</span><span class="module-description"></span><span class="separator"> — </span><span class="delete" @click=${() => { this.deleteApp(Object.keys(window.localStorage)[i])}}>delete</span></div>`);
+              }
+            }
+            return html`
+              <div class="modules">
+                ${modulesList.length !== 0 ? html`${modulesList}` : html`<span class="module-description">no modules yet!<span>`}
+              </div>
+            `;
           }
         }
-        return html`
-          <div class="modules">
-            ${modulesList.length !== 0 ? html`${modulesList}` : html`<span class="module-description">no modules yet!<span>`}
-          </div>
-        `;
-      }
+        customElements.get("modules-box") || customElements.define("modules-box", moduleBox);
+      });
     }
-    customElements.get("modules-box") || customElements.define("modules-box", moduleBox);
   </script>
 
   <main id="app">
