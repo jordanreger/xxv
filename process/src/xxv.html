@@ -164,7 +164,7 @@
             location.reload();
           })
         }
-      } else if (!currentVersion){
+      } else if (!currentCommit){
         let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
           .then((data) => data.json())
           .then((data) => { return data })
