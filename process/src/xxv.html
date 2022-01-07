@@ -149,27 +149,27 @@
     }
 
     async function getLatest(){
-      let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/releases")
+      let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commits")
         .then((data) => data.json())
         .then((data) => { return data })
-      let latestVersion = latest[0].tag_name, currentVersion = localStorage.getItem("version");
-      if(currentVersion !== latestVersion){
+      let latestCommit = latest[0].sha, currentCommit = localStorage.getItem("commit");
+      if(currentCommit !== latestCommit){
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker.getRegistrations().then(function(registrations) {
             for(let registration of registrations) {
               registration.unregister()
           }}).then(() => {
-            console.log("getting latest version");
-            localStorage.setItem("version", latestVersion);
+            console.log("getting latest commit");
+            localStorage.setItem("commit", latestCommit);
             location.reload();
           })
         }
       } else if (!currentVersion){
-        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/releases")
+        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
           .then((data) => data.json())
           .then((data) => { return data })
-        let latestVersion = latest[0].tag_name;
-        localStorage.setItem("version", latestVersion);
+        let latestCommit = latest[0].sha;
+        localStorage.setItem("commit", latestCommit);
       }
     }
 
