@@ -192,15 +192,24 @@
       <div class="subtitle" id="modules"><a href="#modules">modules</a></div>
       <br/>
       <div class="body">
-        modules are single html files that make up the xxv network. they are imported by inputting the title of the file (ex. <i>about</i>.html) into the import bar. all modules are hosted in <a href="/modules" class="outbound">this repository</a>. to add your own app to the collection, <a href="https://github.com/xxvnetwork/modules/pulls" class="outbound">create a pull request!</a>
+        modules are json files that make up the xxv network. they are imported by inputting the title of the file (ex. <i>about</i>.json) into the import bar. all modules are hosted in <a href="/modules" class="outbound">this repository</a>. to add your own app to the collection, <a href="https://github.com/xxvnetwork/modules/pulls" class="outbound">create a pull request!</a>
         <br/>
         <br/>
-        here are some test modules to demonstrate the capabilities of xxv:
+        here's a sample <code>module.json</code> file:
         <br/>
         <br/>
-        [<a href="https://github.com/xxvnetwork/modules/blob/main/about.html" class="outbound">about</a>] ~ displays the about page.
-        <br/>
-        [<a href="https://github.com/xxvnetwork/modules/blob/main/fx.html" class="outbound">fx</a>] ~ a mockup editor (work in progress)
+        <pre style="word-wrap: break-word; white-space: pre-wrap;">
+{
+  "name": "your.module.name",
+  "version": "0.0.1",
+  "description": "a short description",
+  "src": "https://github.com/example/example/blob/main/example.html",
+  "cache": [
+    "https://fonts.com/inter",
+    "https://img.com/src"
+  ]
+}
+        </pre>
       </div>
       <br/>
       <br/>
