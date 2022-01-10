@@ -31,9 +31,9 @@ async function handler(req: Request): Promise<any> {
       break;
 
     case '/module':
-      let data = String(params.get("data"));
+      let data = String(params.get("data")), title = String(params.get("title"));
       data = data.replace(" ", "+");
-      tr = true, rb = `<object data="data:text/html;base64,${decodeURIComponent(data)}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`, ct = "text/html; charset=UTF-8";
+      tr = true, rb = `<title>${title}</title><object data="data:text/html;base64,${decodeURIComponent(data)}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`, ct = "text/html; charset=UTF-8";
       break;
 
     default:

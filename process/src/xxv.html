@@ -392,7 +392,7 @@
           `;
 
           spawnApp(mod){
-            window.open(`/module?data=${localStorage.getItem(mod)}`, "test", "popup,noopener");
+            window.open(`/module?data=${localStorage.getItem(mod)}&title=${mod}`, "test", "popup,noopener");
           }
 
           async deleteApp(mod){
