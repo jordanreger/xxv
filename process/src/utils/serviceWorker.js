@@ -1,6 +1,7 @@
 const page = "xxv.network"
 const assets = [
-  "/"
+  "/",
+  "/settings"
 ]
 
 self.addEventListener("install", installEvent => {

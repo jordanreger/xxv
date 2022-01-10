@@ -13,6 +13,10 @@ async function handler(req: Request): Promise<any> {
       tr = true, rb = await file("./process/src/xxv.html"), ct = "text/html; charset=UTF-8";
       break;
 
+    case '/settings':
+      tr = true, rb = await file("./process/src/settings.html"), ct = "text/html; charset=UTF-8";
+      break;
+
     case '/robots.txt':
       tr = true, rb = "User-agent: * Disallow:", ct = "text/plain";
       break;

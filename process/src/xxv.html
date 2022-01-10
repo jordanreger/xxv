@@ -84,11 +84,6 @@
         top: 0;
         width: 100%;
         height: 100%;
-        font-family: Helvetica;
-        font-weight: bold;
-        font-size: 5vmin;
-        user-select: none;
-        color: #e0e0e0;
       }
 
       .import-bar {
@@ -132,6 +127,33 @@
 
       ::-webkit-scrollbar {
           width: 0;
+      }
+
+      #import-text {
+        position: asbsolute;
+        left: 0;
+        font-family: Helvetica;
+        font-weight: bold;
+        font-size: 5vmin;
+        user-select: none;
+        color: #e0e0e0;
+      }
+
+      #settings-text {
+        position: absolute;
+        right: 0;
+        font-family: Arial;
+        font-size: 4.5vmin;
+        user-select: none;
+        color: #212121;
+      }
+
+      #settings-text:hover {
+        font-family: Arial;
+        font-size: 4.5vmin;
+        user-select: none;
+        cursor: pointer;
+        color: #424242;
       }
     </style>
 
@@ -408,15 +430,10 @@
   </script>
 
   <main id="app">
-    <div class="import-title">Import</div>
+    <div class="import-title"><span id="import-text">import</span><a href="/settings"><span id="settings-text">settings</span></a></div>
     <import-bar class="import-bar" id="import-bar"></import-bar>
-    <div class="modules-title">Modules</div>
+    <div class="modules-title">modules</div>
     <modules-box class="modules-box" id="modules-box"></modules-box>
-    <!--<button onClick="unregisterSW()">unregister</button>-->
-    <script>
-      function unregisterSW(){
-        navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } })
-      }
     </script>
   </main>
 </html>

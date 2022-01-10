@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no"
+    />
+    <meta
+      name="theme-color"
+      content="#000"
+    />
+
+    <title>xxv — settings</title>
+
+    <style>
+      html {
+        background-color: #000;
+      }
+
+      ::-moz-selection {
+        color: #000;
+        background: #ffcf96;
+      }
+
+      ::selection {
+        color: #000;
+        background: #ffcf96;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #ffcf96;
+        cursor: pointer;
+      }
+
+      #app {
+        background-color: #000;
+        position: absolute;
+        height: auto;
+        left: 5vmin;
+        top: 5vmin;
+        right: 5vmin;
+        bottom: 5vmin;
+      }
+    </style>
+
+  </head>
+  <script name="setup">
+
+    // this is here because lit elements and esm.sh won't shut up
+    console.warn = () => {};
+    //
+
+    function hfs(size) {
+      var i = Math.floor( Math.log(size) / Math.log(1024) );
+      return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ['b', 'kb', 'mb'][i];
+    };
+
+    if(!navigator.onLine){
+      console.log("xxv.connection: offline");
+    } else {
+      console.log("xxv.connection: online");
+    }
+
+    if ('storage' in navigator && 'estimate' in navigator.storage) {
+      navigator.storage.estimate().then(estimate => {
+        console.log(`xxv.appSize: ${hfs(estimate.usage)}`);
+      });
+    }
+
+    console.log(`xxv.latestCommit: ${localStorage.getItem("commit")}`);
+
+    async function getLatest(){
+      if(navigator.onLine){
+        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commits")
+          .then((data) => data.json())
+          .then((data) => { return data })
+        let latestCommit = latest[0].sha, currentCommit = localStorage.getItem("commit");
+        if(currentCommit !== latestCommit){
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+              for(let registration of registrations) {
+                registration.unregister()
+            }}).then(() => {
+              localStorage.setItem("commit", latestCommit);
+              location.reload();
+            })
+          }
+        } else if (!currentCommit){
+          let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
+            .then((data) => data.json())
+            .then((data) => { return data })
+          let latestCommit = latest[0].sha;
+          localStorage.setItem("commit", latestCommit);
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      window.resizeTo(475, 600);
+      getLatest();
+    }, true);
+  </script>
+  <script name="infoBar" type="module">
+    let LitElement, html, css;
+    if(navigator.onLine){
+      import("https://esm.sh/lit").then(ex => {
+        LitElement = ex.LitElement, html = ex.html, css = ex.css;
+
+        class infoBar extends LitElement {
+          static styles = css`
+            ::-moz-selection {
+              color: #000;
+              background: #ffcf96;
+            }
+
+            ::selection {
+              color: #000;
+              background: #ffcf96;
+            }
+
+            .title {
+              position: asbsolute;
+              left: 0;
+              font-family: Helvetica;
+              font-weight: bold;
+              font-size: 5vmin;
+              user-select: none;
+              color: #e0e0e0;
+            }
+
+            .arrow {
+              display: inline-block;
+              font-family: Courier;
+              font-size: 3vmin;
+              -moz-transform: scale(-1, 1);
+              -webkit-transform: scale(-1, 1);
+              transform: scale(-1, 1);
+              user-select: none;
+              color: #696969;
+            }
+
+            .title {
+              font-family: Arial;
+              font-size: 3vmin;
+              color: #c4c4c4;
+              user-select: none;
+            }
+
+            .data {
+              font-family: Arial;
+              font-size: 3vmin;
+              color: #c4c4c4;
+            }
+
+            .separator {
+              font-family: Arial;
+              font-weight: bold;
+              font-size: 3vmin;
+              user-select: none;
+              color: #212121;
+            }
+
+            a {
+              color: inherit;
+              text-decoration: none;
+            }
+
+            a:hover {
+              color: #ffcf96;
+              cursor: pointer;
+            }
+          `;
+
+          hfs(size) {
+            var i = Math.floor( Math.log(size) / Math.log(1024) );
+            return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ['b', 'kb', 'mb'][i];
+          };
+
+          render() {
+            return html`
+            <div class="title"><a href="/">←</a> settings</div>
+            <br/>
+            <br/>
+            <div class="title">developer</div>
+            <br/>
+            <div><span class="arrow">↵</span><span class="title"> commit</span><span class="separator"> — </span><span class="data"><a href="https://github.com/xxvnetwork/xxv/commit/${localStorage.getItem("commit")}">${localStorage.getItem("commit")}</a></span></div>
+            <div><span class="arrow">↵</span><span class="title"> connection</span><span class="separator"> — </span><span class="data">${navigator.onLine ? html`online` : html`offline`}</span></div>
+            <div><span class="arrow">↵</span><span class="title"> app size</span><span class="separator"> — </span><span class="data">coming soon because i can't figure out how to import "<a href="https://lit.dev/docs/templates/directives/#until">until</a>"</span></div>
+            <br/>
+            <br/>
+            <div class="title">credits</div>
+            <br/>
+            <div><span class="arrow">↵</span><span class="title"> built by <a href="https://jordanreger.com">jordan reger</a> with ♡ and coffee</span></div>
+            <div><span class="arrow">↵</span><span class="title"> github</span><span class="separator"> — </span><span class="data"><a href="https://github.com/xxvnetwork/xxv">xxvnetwork/xxv</a></span></div>
+            <div><span class="arrow">↵</span><span class="title"> sourcehut</span><span class="separator"> — </span><span class="data"><a href="https://sr.ht/~jordanreger/xxv">coming soon!</a></span></div>
+            `;
+          }
+        }
+        customElements.get("info-bar") || customElements.define("info-bar", infoBar);
+      });
+    }
+  </script>
+
+  <main id="app">
+    <info-bar></info-bar>
+  </main>
+</html>
