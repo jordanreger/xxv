@@ -13,10 +13,6 @@ async function handler(req: Request): Promise<any> {
       tr = true, rb = await file("./process/src/xxv.html"), ct = "text/html; charset=UTF-8";
       break;
 
-    case '/settings':
-      tr = true, rb = await file("./process/src/settings.html"), ct = "text/html; charset=UTF-8";
-      break;
-
     case '/robots.txt':
       tr = true, rb = "User-agent: * Disallow:", ct = "text/plain";
       break;
@@ -34,6 +30,10 @@ async function handler(req: Request): Promise<any> {
       let data = String(params.get("data")), title = String(params.get("title"));
       data = data.replace(" ", "+");
       tr = true, rb = `<title>${title}</title><object data="data:text/html;base64,${decodeURIComponent(data)}" style="position:absolute;left:0;top:0;width:100%;height:100%;"></object>`, ct = "text/html; charset=UTF-8";
+      break;
+    case '/resource':
+      let url = String(params.get("url"));
+      tr = false, rb = url;
       break;
 
     default:
