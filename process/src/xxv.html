@@ -227,7 +227,7 @@
   <script name="importBar" type="module">
     let LitElement, html, css;
     if(navigator.onLine){
-      import("/resource?url=https://esm.sh/lit").then(ex => {
+      import("/resource?url=https://cdn.esm.sh/v62/lit-element@3.1.1/es2021/lit-element.js").then(ex => {
         LitElement = ex.LitElement, html = ex.html, css = ex.css;
 
         class importBar extends LitElement {
@@ -328,7 +328,7 @@
   <script name="moduleBox" type="module">
     let LitElement, html, css;
     if(navigator.onLine){
-      import("/resource?url=https://esm.sh/lit").then(ex => {
+      import("/resource?url=https://cdn.esm.sh/v62/lit-element@3.1.1/es2021/lit-element.js").then(ex => {
         LitElement = ex.LitElement, html = ex.html, css = ex.css;
         class moduleBox extends LitElement {
           static styles = css`

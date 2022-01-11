@@ -3,7 +3,7 @@ const assets = [
   "/",
   "/manifest.webmanifest",
   "/xxvlogo.png",
-  "/resource?url=https://esm.sh/lit",
+  "/resource?url=https://cdn.esm.sh/v62/lit-element@3.1.1/es2021/lit-element.js",
   "/settings"
 ]
 
