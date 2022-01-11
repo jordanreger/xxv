@@ -1,6 +1,8 @@
 const page = "xxv.network"
 const assets = [
   "/",
+  "/manifest.webmanifest",
+  "/resource?url=https://esm.sh/lit",
   "/settings"
 ]
 
