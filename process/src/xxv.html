@@ -227,7 +227,7 @@
   <script name="importBar" type="module">
     let LitElement, html, css;
     if(navigator.onLine){
-      import("https://esm.sh/lit").then(ex => {
+      import("/resource?url=https://esm.sh/lit").then(ex => {
         LitElement = ex.LitElement, html = ex.html, css = ex.css;
 
         class importBar extends LitElement {
@@ -318,14 +318,17 @@
           }
         }
         customElements.get("import-bar") || customElements.define("import-bar", importBar);
-      });
+      })
+      .catch(() => {
+
+      })
     }
   </script>
 
   <script name="moduleBox" type="module">
     let LitElement, html, css;
     if(navigator.onLine){
-      import("https://esm.sh/lit").then(ex => {
+      import("/resource?url=https://esm.sh/lit").then(ex => {
         LitElement = ex.LitElement, html = ex.html, css = ex.css;
         class moduleBox extends LitElement {
           static styles = css`
