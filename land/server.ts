@@ -19,7 +19,7 @@ async function handler(req: Request): Promise<any> {
     case route('/mod/.'):
       let mod = path.replace("/mod/", "");
       try {
-        let data = await fetch(`https://raw.githubusercontent.com/xxvnetwork/modules/main/${mod}.json`)
+        let data = await fetch(`https://raw.githubusercontent.com/jordanreger/xxv-modules/main/${mod}.json`)
           .then((data) => data.json())
           .then((data) => { return data })
         let request = params.get("request");
@@ -122,7 +122,7 @@ async function handler(req: Request): Promise<any> {
             </head>
 
             <main id="app">
-              <div class="module"><span class="arrow">↵</span> <span class="module-name"><a href="https://github.com/xxvnetwork/modules/blob/main/${data.name}.json">${data.name}</a></span><span class="separator"> — </span><span class="module-description">${data.description}</span></div>
+              <div class="module"><span class="arrow">↵</span> <span class="module-name"><a href="https://github.com/jordanreger/xxv-modules/blob/main/${data.name}.json">${data.name}</a></span><span class="separator"> — </span><span class="module-description">${data.description}</span></div>
               <br/>
               <br/>
               <span class="module-description">cache urls</span>
@@ -141,12 +141,12 @@ async function handler(req: Request): Promise<any> {
           rb = "404", ct = "text/html; charset=UTF-8";
         }
       } catch(error) {
-        tr = false, rb = "https://github.com/xxvnetwork/modules";
+        tr = false, rb = "https://github.com/jordanreger/xxv-modules";
       }
       break;
 
-    case '/modules':
-      tr = false, rb = "https://github.com/xxvnetwork/modules";
+    case '/xxv-modules':
+      tr = false, rb = "https://github.com/jordanreger/xxv-modules";
       break;
 
     default:
