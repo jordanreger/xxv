@@ -186,7 +186,7 @@
 
     async function getLatest(){
       if(navigator.onLine){
-        let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commits")
+        let latest = await fetch("https://api.github.com/repos/jordanreger/xxv/commits")
           .then((data) => data.json())
           .then((data) => { return data })
         let latestCommit = latest[0].sha, currentCommit = localStorage.getItem("commit");
@@ -201,7 +201,7 @@
             })
           }
         } else if (!currentCommit){
-          let latest = await fetch("https://api.github.com/repos/xxvnetwork/xxv/commit")
+          let latest = await fetch("https://api.github.com/repos/jordanreger/xxv/commit")
             .then((data) => data.json())
             .then((data) => { return data })
           let latestCommit = latest[0].sha;
